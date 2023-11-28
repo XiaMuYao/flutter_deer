@@ -13,10 +13,8 @@ import 'package:flutter/services.dart';
 /// 1.22已修复：https://github.com/flutter/flutter/pull/63754
 @Deprecated('1.22已修复')
 class FixIOSTextInputFormatter extends TextInputFormatter {
-
   @override
   TextEditingValue formatEditUpdate(TextEditingValue oldValue, TextEditingValue newValue) {
-
     if (Platform.isIOS) {
       // ios Composing变化也执行format，因为在拼音阶段没有执行LengthLimitingTextInputFormatter，从拼音到汉字需要重新执行
       if (newValue.composing.isValid) {
@@ -29,5 +27,4 @@ class FixIOSTextInputFormatter extends TextInputFormatter {
       selection: TextSelection.collapsed(offset: newValue.selection.end),
     );
   }
-
 }

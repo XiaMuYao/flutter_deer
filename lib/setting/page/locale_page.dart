@@ -7,7 +7,6 @@ import 'package:provider/provider.dart';
 import 'package:sp_util/sp_util.dart';
 
 class LocalePage extends StatefulWidget {
-
   const LocalePage({super.key});
 
   @override
@@ -15,14 +14,13 @@ class LocalePage extends StatefulWidget {
 }
 
 class _LocalePageState extends State<LocalePage> {
-
   final List<String> _list = <String>['跟随系统', '中文', 'English'];
 
   @override
   Widget build(BuildContext context) {
     final String? locale = SpUtil.getString(Constant.locale);
     String localeMode;
-    switch(locale) {
+    switch (locale) {
       case 'zh':
         localeMode = _list[1];
         break;

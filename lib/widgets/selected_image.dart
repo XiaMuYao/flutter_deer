@@ -11,7 +11,6 @@ import 'package:flutter_deer/util/toast_utils.dart';
 import 'package:image_picker/image_picker.dart';
 
 class SelectedImage extends StatefulWidget {
-
   const SelectedImage({
     super.key,
     this.url,
@@ -28,7 +27,6 @@ class SelectedImage extends StatefulWidget {
 }
 
 class SelectedImageState extends State<SelectedImage> {
-
   final ImagePicker _picker = ImagePicker();
   ImageProvider? _imageProvider;
   XFile? pickedFile;
@@ -37,19 +35,15 @@ class SelectedImageState extends State<SelectedImage> {
     try {
       pickedFile = await _picker.pickImage(source: ImageSource.gallery, maxWidth: 800);
       if (pickedFile != null) {
-
         if (Device.isWeb) {
           _imageProvider = NetworkImage(pickedFile!.path);
         } else {
           _imageProvider = FileImage(File(pickedFile!.path));
         }
-
       } else {
         _imageProvider = null;
       }
-      setState(() {
-
-      });
+      setState(() {});
     } catch (e) {
       if (e is MissingPluginException) {
         Toast.show('当前平台暂不支持！');
@@ -61,10 +55,8 @@ class SelectedImageState extends State<SelectedImage> {
 
   @override
   Widget build(BuildContext context) {
-    final ColorFilter colorFilter = ColorFilter.mode(
-        ThemeUtils.isDark(context) ? Colours.dark_unselected_item_color : Colours.text_gray,
-        BlendMode.srcIn
-    );
+    final ColorFilter colorFilter =
+        ColorFilter.mode(ThemeUtils.isDark(context) ? Colours.dark_unselected_item_color : Colours.text_gray, BlendMode.srcIn);
 
     Widget image = Container(
       width: widget.size,
@@ -75,8 +67,7 @@ class SelectedImageState extends State<SelectedImage> {
         image: DecorationImage(
             image: _imageProvider ?? ImageUtils.getImageProvider(widget.url, holderImg: 'store/icon_zj'),
             fit: BoxFit.cover,
-            colorFilter: _imageProvider == null && TextUtil.isEmpty(widget.url) ? colorFilter : null
-        ),
+            colorFilter: _imageProvider == null && TextUtil.isEmpty(widget.url) ? colorFilter : null),
       ),
     );
 

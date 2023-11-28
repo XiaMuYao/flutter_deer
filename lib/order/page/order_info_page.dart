@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_deer/res/resources.dart';
 import 'package:flutter_deer/routers/fluro_navigator.dart';
@@ -12,10 +11,8 @@ import 'package:flutter_deer/widgets/my_scroll_view.dart';
 
 import '../order_router.dart';
 
-
 /// design/3订单/index.html#artboard10
 class OrderInfoPage extends StatefulWidget {
-
   const OrderInfoPage({super.key});
 
   @override
@@ -23,7 +20,6 @@ class OrderInfoPage extends StatefulWidget {
 }
 
 class _OrderInfoPageState extends State<OrderInfoPage> {
-  
   @override
   Widget build(BuildContext context) {
     final Color red = Theme.of(context).colorScheme.error;
@@ -155,19 +151,18 @@ class _OrderInfoPageState extends State<OrderInfoPage> {
     ];
 
     return Scaffold(
-      appBar: MyAppBar(
-        actionName: '订单跟踪',
-        onPressed: () {
-          NavigatorUtils.push(context, OrderRouter.orderTrackPage);
-        },
-      ),
-      body: MyScrollView(
-        key: const Key('order_info'),
-        padding: const EdgeInsets.symmetric(horizontal: 16.0),
-        bottomButton: bottomMenu,
-        children: children,
-      )
-    );
+        appBar: MyAppBar(
+          actionName: '订单跟踪',
+          onPressed: () {
+            NavigatorUtils.push(context, OrderRouter.orderTrackPage);
+          },
+        ),
+        body: MyScrollView(
+          key: const Key('order_info'),
+          padding: const EdgeInsets.symmetric(horizontal: 16.0),
+          bottomButton: bottomMenu,
+          children: children,
+        ));
   }
 
   Widget _buildOrderInfoItem(String title, String content) {
@@ -232,10 +227,7 @@ class _OrderInfoPageState extends State<OrderInfoPage> {
           bottom: Divider.createBorderSide(context, width: 0.8),
         ),
       ),
-      child: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 16.0),
-        child: item
-      ),
+      child: Padding(padding: const EdgeInsets.symmetric(vertical: 16.0), child: item),
     );
   }
 
@@ -250,11 +242,15 @@ class _OrderInfoPageState extends State<OrderInfoPage> {
       alignment: Alignment.center,
       child: Text(
         text,
-        style: TextStyle(color: Colors.white, fontSize: Dimens.font_sp10, height: Device.isAndroid ? 1.1 : null,),
+        style: TextStyle(
+          color: Colors.white,
+          fontSize: Dimens.font_sp10,
+          height: Device.isAndroid ? 1.1 : null,
+        ),
       ),
     );
   }
-  
+
   Widget _buildGoodsInfoItem(String title, String content, {Color? contentTextColor}) {
     return MergeSemantics(
       child: Container(
@@ -263,10 +259,9 @@ class _OrderInfoPageState extends State<OrderInfoPage> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
             Text(title),
-            Text(content, style: TextStyle(
-              color: contentTextColor ?? Theme.of(context).textTheme.bodyMedium?.color,
-              fontWeight: FontWeight.bold
-            ))
+            Text(content,
+                style: TextStyle(
+                    color: contentTextColor ?? Theme.of(context).textTheme.bodyMedium?.color, fontWeight: FontWeight.bold))
           ],
         ),
       ),
@@ -275,31 +270,33 @@ class _OrderInfoPageState extends State<OrderInfoPage> {
 
   void _showCallPhoneDialog(String phone) {
     showDialog<void>(
-      context: context,
-      barrierDismissible: false,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: const Text('提示'),
-          content: Text('是否拨打：$phone ?'),
-          actions: <Widget>[
-            TextButton(
-              onPressed: () => NavigatorUtils.goBack(context),
-              child: const Text('取消'),
-            ),
-            TextButton(
-              onPressed: () {
-                Utils.launchTelURL(phone);
-                NavigatorUtils.goBack(context);
-              },
-              style: ButtonStyle(
-                // 按下高亮颜色
-                overlayColor: MaterialStateProperty.all<Color>(Theme.of(context).colorScheme.error.withOpacity(0.2)),
+        context: context,
+        barrierDismissible: false,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: const Text('提示'),
+            content: Text('是否拨打：$phone ?'),
+            actions: <Widget>[
+              TextButton(
+                onPressed: () => NavigatorUtils.goBack(context),
+                child: const Text('取消'),
               ),
-              child: Text('拨打', style: TextStyle(color: Theme.of(context).colorScheme.error),),
-            ),
-          ],
-        );
-      }
-    );
+              TextButton(
+                onPressed: () {
+                  Utils.launchTelURL(phone);
+                  NavigatorUtils.goBack(context);
+                },
+                style: ButtonStyle(
+                  // 按下高亮颜色
+                  overlayColor: MaterialStateProperty.all<Color>(Theme.of(context).colorScheme.error.withOpacity(0.2)),
+                ),
+                child: Text(
+                  '拨打',
+                  style: TextStyle(color: Theme.of(context).colorScheme.error),
+                ),
+              ),
+            ],
+          );
+        });
   }
 }

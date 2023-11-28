@@ -1,11 +1,9 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_deer/res/resources.dart';
 import 'package:flutter_deer/routers/fluro_navigator.dart';
 import 'package:flutter_deer/util/theme_utils.dart';
 
 class GoodsSortMenu extends StatefulWidget {
-
   const GoodsSortMenu({
     super.key,
     required this.data,
@@ -24,7 +22,6 @@ class GoodsSortMenu extends StatefulWidget {
 }
 
 class _GoodsSortMenuState extends State<GoodsSortMenu> with SingleTickerProviderStateMixin {
-
   late final AnimationController _controller = AnimationController(
     duration: const Duration(milliseconds: 300),
     vsync: this,
@@ -64,10 +61,12 @@ class _GoodsSortMenuState extends State<GoodsSortMenu> with SingleTickerProvider
       physics: const ClampingScrollPhysics(),
       itemCount: widget.data.length + 1,
       itemBuilder: (_, int index) {
-        return index == widget.data.length ? Container(
-          color: backgroundColor,
-          height: 12.0,
-        ) : _buildItem(index, backgroundColor);
+        return index == widget.data.length
+            ? Container(
+                color: backgroundColor,
+                height: 12.0,
+              )
+            : _buildItem(index, backgroundColor);
       },
     );
 

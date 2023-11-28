@@ -10,7 +10,6 @@ import 'package:flutter_deer/widgets/my_app_bar.dart';
 
 /// design/6店铺-账户/index.html#artboard20
 class WithdrawalPasswordPage extends StatefulWidget {
-
   const WithdrawalPasswordPage({super.key});
 
   @override
@@ -28,22 +27,19 @@ class _WithdrawalPasswordPageState extends State<WithdrawalPasswordPage> {
         children: <Widget>[
           Gaps.vGap5,
           ClickItem(
-            title: '修改密码',
-            onTap: () {
-              showModalBottomSheet<void>(
-                context: context,
-                /// 禁止拖动关闭
-                enableDrag: false,
-                /// 使用true则高度不受16分之9的最高限制
-                isScrollControlled: true,
-                builder: (_) => const WithdrawalPasswordSetting()
-              );
-            }
-          ),
-          ClickItem(
-            title: '忘记密码',
-            onTap: () => _showHintDialog()
-          ),
+              title: '修改密码',
+              onTap: () {
+                showModalBottomSheet<void>(
+                    context: context,
+
+                    /// 禁止拖动关闭
+                    enableDrag: false,
+
+                    /// 使用true则高度不受16分之9的最高限制
+                    isScrollControlled: true,
+                    builder: (_) => const WithdrawalPasswordSetting());
+              }),
+          ClickItem(title: '忘记密码', onTap: () => _showHintDialog()),
         ],
       ),
     );
@@ -70,10 +66,6 @@ class _WithdrawalPasswordPageState extends State<WithdrawalPasswordPage> {
   }
 
   void _showVerifyDialog() {
-    showDialog<void>(
-      context: context,
-      barrierDismissible: false,
-      builder: (_) => const SMSVerifyDialog()
-    );
+    showDialog<void>(context: context, barrierDismissible: false, builder: (_) => const SMSVerifyDialog());
   }
 }

@@ -12,10 +12,8 @@ import 'package:flutter_deer/widgets/my_scroll_view.dart';
 import 'package:flutter_deer/widgets/selected_item.dart';
 import 'package:flutter_deer/widgets/text_field_item.dart';
 
-
 /// design/6店铺-账户/index.html#artboard29
 class AddWithdrawalAccountPage extends StatefulWidget {
-
   const AddWithdrawalAccountPage({super.key});
 
   @override
@@ -28,7 +26,7 @@ class _AddWithdrawalAccountPageState extends State<AddWithdrawalAccountPage> {
   String _city = '';
   String _bank = '';
   String _bank1 = '';
-  
+
   @override
   Widget build(BuildContext context) {
     final TextStyle? style = Theme.of(context).textTheme.titleSmall?.copyWith(fontSize: Dimens.font_sp14);
@@ -40,7 +38,9 @@ class _AddWithdrawalAccountPageState extends State<AddWithdrawalAccountPage> {
         onTap: () => _showSelectAccountTypeDialog(),
       ),
       Visibility(
-        maintainState: true, /// 是为了保留填写信息，其实就是Offstage，这里只是展示另一种方法。
+        maintainState: true,
+
+        /// 是为了保留填写信息，其实就是Offstage，这里只是展示另一种方法。
         visible: !_isWechat,
         child: Column(
           children: <Widget>[
@@ -110,15 +110,14 @@ class _AddWithdrawalAccountPageState extends State<AddWithdrawalAccountPage> {
         title: '添加账号',
       ),
       body: MyScrollView(
-        bottomButton: Padding(
-          padding: const EdgeInsets.only(left: 16.0, right: 16.0, bottom: 8.0),
-          child: MyButton(
-            onPressed: () => NavigatorUtils.goBackWithParams(context, 'add'),
-            text: '确定',
+          bottomButton: Padding(
+            padding: const EdgeInsets.only(left: 16.0, right: 16.0, bottom: 8.0),
+            child: MyButton(
+              onPressed: () => NavigatorUtils.goBackWithParams(context, 'add'),
+              text: '确定',
+            ),
           ),
-        ),
-        children: children
-      ),
+          children: children),
     );
   }
 
@@ -208,6 +207,6 @@ class _AddWithdrawalAccountPageState extends State<AddWithdrawalAccountPage> {
           ),
         );
       },
-    );        
+    );
   }
 }

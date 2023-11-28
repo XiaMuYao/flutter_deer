@@ -1,4 +1,3 @@
-
 import 'dart:io';
 
 import 'package:flutter/material.dart';
@@ -7,7 +6,6 @@ import 'package:flutter_deer/widgets/my_app_bar.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
 
 class QrCodeScannerPage extends StatefulWidget {
-
   const QrCodeScannerPage({super.key});
 
   @override
@@ -33,10 +31,7 @@ class _QrCodeScannerPageState extends State<QrCodeScannerPage> {
 
   @override
   Widget build(BuildContext context) {
-    final scanArea = (MediaQuery.of(context).size.width < 400 ||
-        MediaQuery.of(context).size.height < 400)
-        ? 250.0
-        : 300.0;
+    final scanArea = (MediaQuery.of(context).size.width < 400 || MediaQuery.of(context).size.height < 400) ? 250.0 : 300.0;
     return Scaffold(
       body: Stack(
         children: <Widget>[
@@ -58,7 +53,11 @@ class _QrCodeScannerPageState extends State<QrCodeScannerPage> {
             right: 0,
             child: Center(
               child: IconButton(
-                icon: const Icon(Icons.highlight_outlined, size: 32, color: Colors.white,),
+                icon: const Icon(
+                  Icons.highlight_outlined,
+                  size: 32,
+                  color: Colors.white,
+                ),
                 onPressed: () {
                   controller?.toggleFlash();
                 },

@@ -14,7 +14,6 @@ const List<String> orderLeftButtonText = ['拒单', '拒单', '订单跟踪', '�
 const List<String> orderRightButtonText = ['接单', '开始配送', '完成', '', ''];
 
 class OrderItem extends StatelessWidget {
-
   const OrderItem({
     super.key,
     required this.tabIndex,
@@ -23,22 +22,20 @@ class OrderItem extends StatelessWidget {
 
   final int tabIndex;
   final int index;
-  
+
   @override
   Widget build(BuildContext context) {
-
     return Padding(
-      padding: const EdgeInsets.only(top: 8.0),
-      child: MyCard(
-        child: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: InkWell(
-            onTap: () => NavigatorUtils.push(context, OrderRouter.orderInfoPage),
-            child: _buildContent(context),
+        padding: const EdgeInsets.only(top: 8.0),
+        child: MyCard(
+          child: Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: InkWell(
+              onTap: () => NavigatorUtils.push(context, OrderRouter.orderInfoPage),
+              child: _buildContent(context),
+            ),
           ),
-        ),
-      )
-    );
+        ));
   }
 
   Widget _buildContent(BuildContext context) {
@@ -97,7 +94,8 @@ class OrderItem extends StatelessWidget {
                   style: textTextStyle,
                   children: <TextSpan>[
                     TextSpan(text: Utils.formatPrice('20.00', format: MoneyFormat.NORMAL)),
-                    TextSpan(text: '  共3件商品', style: Theme.of(context).textTheme.titleSmall?.copyWith(fontSize: Dimens.font_sp10)),
+                    TextSpan(
+                        text: '  共3件商品', style: Theme.of(context).textTheme.titleSmall?.copyWith(fontSize: Dimens.font_sp10)),
                   ],
                 ),
               ),
@@ -135,17 +133,20 @@ class OrderItem extends StatelessWidget {
               },
             ),
             if (orderRightButtonText[tabIndex].isEmpty) Gaps.empty else Gaps.hGap10,
-            if (orderRightButtonText[tabIndex].isEmpty) Gaps.empty else OrderItemButton(
-              key: Key('order_button_3_$index'),
-              text: orderRightButtonText[tabIndex],
-              textColor: isDark ? Colours.dark_button_text : Colors.white,
-              bgColor: isDark ? Colours.dark_app_main : Colours.app_main,
-              onTap: () {
-                if (tabIndex == 2) {
-                  _showPayTypeDialog(context);
-                }
-              },
-            ),
+            if (orderRightButtonText[tabIndex].isEmpty)
+              Gaps.empty
+            else
+              OrderItemButton(
+                key: Key('order_button_3_$index'),
+                text: orderRightButtonText[tabIndex],
+                textColor: isDark ? Colours.dark_button_text : Colors.white,
+                bgColor: isDark ? Colours.dark_app_main : Colours.app_main,
+                onTap: () {
+                  if (tabIndex == 2) {
+                    _showPayTypeDialog(context);
+                  }
+                },
+              ),
           ],
         )
       ],
@@ -174,7 +175,10 @@ class OrderItem extends StatelessWidget {
                 // 按下高亮颜色
                 overlayColor: MaterialStateProperty.all<Color>(Theme.of(context).colorScheme.error.withOpacity(0.2)),
               ),
-              child: Text('拨打', style: TextStyle(color: Theme.of(context).colorScheme.error),),
+              child: Text(
+                '拨打',
+                style: TextStyle(color: Theme.of(context).colorScheme.error),
+              ),
             ),
           ],
         );
@@ -195,25 +199,16 @@ class OrderItem extends StatelessWidget {
       },
     );
   }
-
 }
 
-
 class OrderItemButton extends StatelessWidget {
-  
-  const OrderItemButton({
-    super.key,
-    this.bgColor,
-    this.textColor,
-    required this.text,
-    this.onTap
-  });
-  
+  const OrderItemButton({super.key, this.bgColor, this.textColor, required this.text, this.onTap});
+
   final Color? bgColor;
   final Color? textColor;
   final GestureTapCallback? onTap;
   final String text;
-  
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -230,7 +225,10 @@ class OrderItemButton extends StatelessWidget {
           maxHeight: 30.0,
           minHeight: 30.0,
         ),
-        child: Text(text, style: TextStyle(fontSize: Dimens.font_sp14, color: textColor),),
+        child: Text(
+          text,
+          style: TextStyle(fontSize: Dimens.font_sp14, color: textColor),
+        ),
       ),
     );
   }

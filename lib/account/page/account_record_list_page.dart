@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_deer/res/resources.dart';
 import 'package:flutter_deer/util/theme_utils.dart';
 import 'package:flutter_deer/widgets/my_app_bar.dart';
+
 import '../../order/page/order_page.dart';
 
 /// design/6店铺-账户/index.html#artboard1
 class AccountRecordListPage extends StatefulWidget {
-
   const AccountRecordListPage({super.key});
 
   @override
@@ -21,10 +21,7 @@ class _AccountRecordListPageState extends State<AccountRecordListPage> {
         centerTitle: '账户流水',
       ),
       body: CustomScrollView(
-        slivers: [
-          for (int i = 0; i < 8; i++)
-            _buildGroup(i)
-        ],
+        slivers: [for (int i = 0; i < 8; i++) _buildGroup(i)],
       ),
     );
   }
@@ -41,14 +38,15 @@ class _AccountRecordListPageState extends State<AccountRecordListPage> {
               color: ThemeUtils.getStickyHeaderColor(context),
               padding: const EdgeInsets.only(left: 16.0),
               child: Text('2021/06/0${index + 1}'),
-            )
-            , 34.0,
+            ),
+            34.0,
           ),
         ),
         SliverList(
-          delegate: SliverChildBuilderDelegate((_, index) {
-            return _buildItem(index);
-          },
+          delegate: SliverChildBuilderDelegate(
+            (_, index) {
+              return _buildItem(index);
+            },
             childCount: index + 1,
           ),
         ),
@@ -74,11 +72,14 @@ class _AccountRecordListPageState extends State<AccountRecordListPage> {
             Positioned(
               top: 0.0,
               right: 0.0,
-              child: Text(i.isEven ? '+10.00' : '-10.00',
-                style: i.isEven ? TextStyle(
-                  color: Theme.of(context).colorScheme.error,
-                  fontWeight: FontWeight.bold,
-                ) : TextStyles.textBold14,
+              child: Text(
+                i.isEven ? '+10.00' : '-10.00',
+                style: i.isEven
+                    ? TextStyle(
+                        color: Theme.of(context).colorScheme.error,
+                        fontWeight: FontWeight.bold,
+                      )
+                    : TextStyles.textBold14,
               ),
             ),
             Positioned(

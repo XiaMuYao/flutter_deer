@@ -12,10 +12,8 @@ import 'package:flutter_deer/widgets/load_image.dart';
 import 'package:flutter_deer/widgets/popup_window.dart';
 import 'package:provider/provider.dart';
 
-
 /// design/4商品/index.html
 class GoodsPage extends StatefulWidget {
-
   const GoodsPage({super.key});
 
   @override
@@ -23,7 +21,6 @@ class GoodsPage extends StatefulWidget {
 }
 
 class _GoodsPageState extends State<GoodsPage> with SingleTickerProviderStateMixin, AutomaticKeepAliveClientMixin {
-
   final List<String> _sortList = ['全部商品', '个人护理', '饮料', '沐浴洗护', '厨房用具', '休闲食品', '生鲜水果', '酒水', '家庭清洁'];
   TabController? _tabController;
   final PageController _pageController = PageController();
@@ -33,7 +30,7 @@ class _GoodsPageState extends State<GoodsPage> with SingleTickerProviderStateMix
   final GlobalKey _buttonKey = GlobalKey();
 
   GoodsPageProvider provider = GoodsPageProvider();
-  
+
   @override
   void initState() {
     super.initState();
@@ -49,8 +46,7 @@ class _GoodsPageState extends State<GoodsPage> with SingleTickerProviderStateMix
   /// https://github.com/flutter/flutter/issues/72908
   @override
   // ignore: must_call_super
-  void didChangeDependencies() {
-  }
+  void didChangeDependencies() {}
 
   @override
   Widget build(BuildContext context) {
@@ -95,9 +91,11 @@ class _GoodsPageState extends State<GoodsPage> with SingleTickerProviderStateMix
               label: '选择商品类型',
               child: GestureDetector(
                 key: _buttonKey,
+
                 /// 使用Selector避免同provider数据变化导致此处不必要的刷新
                 child: Selector<GoodsPageProvider, int>(
                   selector: (_, provider) => provider.sortIndex,
+
                   /// 精准判断刷新条件（provider 4.0新属性）
 //                  shouldRebuild: (previous, next) => previous != next,
                   builder: (_, sortIndex, __) {
@@ -111,7 +109,12 @@ class _GoodsPageState extends State<GoodsPage> with SingleTickerProviderStateMix
                           style: TextStyles.textBold24,
                         ),
                         Gaps.hGap8,
-                        LoadAssetImage('goods/expand', width: 16.0, height: 16.0, color: iconColor,)
+                        LoadAssetImage(
+                          'goods/expand',
+                          width: 16.0,
+                          height: 16.0,
+                          color: iconColor,
+                        )
                       ],
                     );
                   },
@@ -149,12 +152,11 @@ class _GoodsPageState extends State<GoodsPage> with SingleTickerProviderStateMix
             Gaps.line,
             Expanded(
               child: PageView.builder(
-                key: const Key('pageView'),
-                itemCount: 3,
-                onPageChanged: _onPageChange,
-                controller: _pageController,
-                itemBuilder: (_, int index) => GoodsListPage(index: index)
-              ),
+                  key: const Key('pageView'),
+                  itemCount: 3,
+                  onPageChanged: _onPageChange,
+                  controller: _pageController,
+                  itemBuilder: (_, int index) => GoodsListPage(index: index)),
             )
           ],
         ),
@@ -207,12 +209,11 @@ class _GoodsPageState extends State<GoodsPage> with SingleTickerProviderStateMix
 }
 
 class _TabView extends StatelessWidget {
-  
   const _TabView(this.tabName, this.index);
-  
+
   final String tabName;
   final int index;
-  
+
   @override
   Widget build(BuildContext context) {
     return Tab(
@@ -228,7 +229,8 @@ class _TabView extends StatelessWidget {
                   visible: !(provider.goodsCountList[index] == 0 || provider.index != index),
                   child: Padding(
                     padding: const EdgeInsets.only(top: 1.0),
-                    child: Text(' (${provider.goodsCountList[index]}件)',
+                    child: Text(
+                      ' (${provider.goodsCountList[index]}件)',
                       style: const TextStyle(fontSize: Dimens.font_sp12),
                     ),
                   ),

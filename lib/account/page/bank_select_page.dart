@@ -13,31 +13,32 @@ import 'package:flutter_deer/widgets/my_app_bar.dart';
 
 /// design/6店铺-账户/index.html#artboard33
 class BankSelectPage extends StatefulWidget {
-  
   const BankSelectPage({super.key, this.type = 0});
-  
+
   final int type;
-  
+
   @override
   _BankSelectPageState createState() => _BankSelectPageState();
 }
 
 class _BankSelectPageState extends State<BankSelectPage> {
-
   final List<BankEntity> _bankList = <BankEntity>[];
-  final List<String> _bankNameList = <String>[
-    '工商银行', '建设银行', '中国银行', '农业银行', 
-    '招商银行', '交通银行', '中信银行', '民生银行', 
-    '兴业银行', '浦发银行'
-  ];
+  final List<String> _bankNameList = <String>['工商银行', '建设银行', '中国银行', '农业银行', '招商银行', '交通银行', '中信银行', '民生银行', '兴业银行', '浦发银行'];
   final List<String> _bankLogoList = <String>[
-    'gongshang', 'jianhang', 'zhonghang', 'nonghang', 
-    'zhaohang', 'jiaohang', 'zhongxin', 'minsheng',
-    'xingye', 'pufa'
+    'gongshang',
+    'jianhang',
+    'zhonghang',
+    'nonghang',
+    'zhaohang',
+    'jiaohang',
+    'zhongxin',
+    'minsheng',
+    'xingye',
+    'pufa'
   ];
 
   List<String> _indexBarData = <String>[];
-  
+
   @override
   void initState() {
     super.initState();
@@ -51,28 +52,29 @@ class _BankSelectPageState extends State<BankSelectPage> {
       list.forEach(_addBank);
       SuspensionUtil.sortListBySuspensionTag(_bankList);
       SuspensionUtil.setShowSuspensionStatus(_bankList);
-      _indexBarData = _bankList.map((BankEntity e) {
-        if (e.isShowSuspension) {
-          return e.firstLetter.nullSafe;
-        } else {
-          return '';
-        }
-      }).where((String element) => element.isNotEmpty).toList();
+      _indexBarData = _bankList
+          .map((BankEntity e) {
+            if (e.isShowSuspension) {
+              return e.firstLetter.nullSafe;
+            } else {
+              return '';
+            }
+          })
+          .where((String element) => element.isNotEmpty)
+          .toList();
       if (widget.type == 0) {
         // add header.
         _bankList.insert(0, BankEntity(firstLetter: '常用'));
         _indexBarData.insert(0, '常用');
       }
-      setState(() {
-       
-      });
+      setState(() {});
     });
   }
 
   void _addBank(dynamic value) {
     _bankList.add(BankEntity.fromJson(value as Map<String, dynamic>));
   }
-  
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -116,25 +118,25 @@ class _BankSelectPageState extends State<BankSelectPage> {
           ),
           Expanded(
             child: ListView.builder(
-              physics: const NeverScrollableScrollPhysics(),
-              itemExtent: 40.0,
-              itemCount: _bankNameList.length,
-              itemBuilder: (_, int index) {
-                return InkWell(
-                  onTap: () => NavigatorUtils.goBackWithParams(context, BankEntity(id: 0, bankName: _bankNameList[index], firstLetter: '')),
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                    child: Row(
-                      children: <Widget>[
-                        LoadAssetImage('account/${_bankLogoList[index]}',width: 24.0),
-                        Gaps.hGap8,
-                        Text(_bankNameList[index]),
-                      ],
+                physics: const NeverScrollableScrollPhysics(),
+                itemExtent: 40.0,
+                itemCount: _bankNameList.length,
+                itemBuilder: (_, int index) {
+                  return InkWell(
+                    onTap: () => NavigatorUtils.goBackWithParams(
+                        context, BankEntity(id: 0, bankName: _bankNameList[index], firstLetter: '')),
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                      child: Row(
+                        children: <Widget>[
+                          LoadAssetImage('account/${_bankLogoList[index]}', width: 24.0),
+                          Gaps.hGap8,
+                          Text(_bankNameList[index]),
+                        ],
+                      ),
                     ),
-                  ),
-                );
-              }
-            ),
+                  );
+                }),
           )
         ],
       ),
@@ -150,19 +152,19 @@ class _BankSelectPageState extends State<BankSelectPage> {
         height: 40.0,
         child: Container(
           decoration: BoxDecoration(
-            border: (model.isShowSuspension && model.id != 17749) ? Border(
-              top: Divider.createBorderSide(context, width: 0.6),
-            ) : null
-          ),
+              border: (model.isShowSuspension && model.id != 17749)
+                  ? Border(
+                      top: Divider.createBorderSide(context, width: 0.6),
+                    )
+                  : null),
           child: Row(
             children: <Widget>[
               Opacity(
-                opacity: model.isShowSuspension ? 1 : 0,
-                child: SizedBox(
-                  width: 28.0,
-                  child: Text(model.firstLetter.nullSafe),
-                )
-              ),
+                  opacity: model.isShowSuspension ? 1 : 0,
+                  child: SizedBox(
+                    width: 28.0,
+                    child: Text(model.firstLetter.nullSafe),
+                  )),
               Expanded(
                 child: Text(model.bankName.nullSafe),
               )

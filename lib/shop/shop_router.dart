@@ -8,15 +8,14 @@ import 'page/select_address_page.dart';
 import 'page/shop_page.dart';
 import 'page/shop_setting_page.dart';
 
-class ShopRouter implements IRouterProvider{
-
+class ShopRouter implements IRouterProvider {
   static String shopPage = '/shop';
   static String shopSettingPage = '/shop/shopSetting';
   static String messagePage = '/shop/message';
   static String freightConfigPage = '/shop/freightConfig';
   static String addressSelectPage = '/shop/addressSelect';
   static String inputTextPage = '/shop/inputText';
-  
+
   @override
   void initRouter(FluroRouter router) {
     router.define(shopPage, handler: Handler(handlerFunc: (_, __) => const ShopPage()));

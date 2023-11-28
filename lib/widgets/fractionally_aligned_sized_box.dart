@@ -21,10 +21,8 @@ class FractionallyAlignedSizedBox extends StatelessWidget {
     this.bottomFactor,
     this.widthFactor,
     this.heightFactor,
-  })  : assert(
-            leftFactor == null || rightFactor == null || widthFactor == null),
-        assert(
-            topFactor == null || bottomFactor == null || heightFactor == null),
+  })  : assert(leftFactor == null || rightFactor == null || widthFactor == null),
+        assert(topFactor == null || bottomFactor == null || heightFactor == null),
         assert(widthFactor == null || widthFactor >= 0.0),
         assert(heightFactor == null || heightFactor >= 0.0);
 

@@ -4,7 +4,6 @@ import 'package:flutter_deer/demo/navigator/delegate/inner_router_delegate.dart'
 
 // Widget that contains the AdaptiveNavigationScaffold
 class AppShell extends StatefulWidget {
-
   const AppShell({
     super.key,
     required this.appState,
@@ -36,9 +35,7 @@ class _AppShellState extends State<AppShell> {
   void didChangeDependencies() {
     super.didChangeDependencies();
     // Defer back button dispatching to the child router
-    _backButtonDispatcher = Router.of(context)
-        .backButtonDispatcher!
-        .createChildBackButtonDispatcher();
+    _backButtonDispatcher = Router.of(context).backButtonDispatcher!.createChildBackButtonDispatcher();
   }
 
   @override
@@ -60,8 +57,7 @@ class _AppShellState extends State<AppShell> {
       bottomNavigationBar: BottomNavigationBar(
         items: const [
           BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
-          BottomNavigationBarItem(
-              icon: Icon(Icons.settings), label: 'Settings'),
+          BottomNavigationBarItem(icon: Icon(Icons.settings), label: 'Settings'),
         ],
         currentIndex: appState.selectedIndex,
         onTap: (newIndex) {

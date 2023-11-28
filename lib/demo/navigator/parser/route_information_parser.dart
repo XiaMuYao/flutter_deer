@@ -4,8 +4,7 @@ import '../book_entity.dart';
 
 class BookRouteInformationParser extends RouteInformationParser<BookRoutePath> {
   @override
-  Future<BookRoutePath> parseRouteInformation(
-      RouteInformation routeInformation) async {
+  Future<BookRoutePath> parseRouteInformation(RouteInformation routeInformation) async {
     final uri = routeInformation.uri;
 
     if (uri.pathSegments.isNotEmpty && uri.pathSegments.first == 'settings') {

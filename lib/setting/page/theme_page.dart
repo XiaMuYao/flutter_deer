@@ -6,7 +6,6 @@ import 'package:provider/provider.dart';
 import 'package:sp_util/sp_util.dart';
 
 class ThemePage extends StatefulWidget {
-
   const ThemePage({super.key});
 
   @override
@@ -14,14 +13,13 @@ class ThemePage extends StatefulWidget {
 }
 
 class _ThemePageState extends State<ThemePage> {
-
   final List<String> _list = <String>['跟随系统', '开启', '关闭'];
 
   @override
   Widget build(BuildContext context) {
     final String? theme = SpUtil.getString(Constant.theme);
     String themeMode;
-    switch(theme) {
+    switch (theme) {
       case 'Dark':
         themeMode = _list[1];
         break;

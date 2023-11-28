@@ -12,7 +12,6 @@ import 'package:flutter_deer/widgets/my_app_bar.dart';
 
 /// design/6店铺-账户/index.html#artboard34
 class CitySelectPage extends StatefulWidget {
-
   const CitySelectPage({super.key});
 
   @override
@@ -20,7 +19,6 @@ class CitySelectPage extends StatefulWidget {
 }
 
 class _CitySelectPageState extends State<CitySelectPage> {
-
   final List<CityEntity> _cityList = <CityEntity>[];
   List<String> _indexBarData = <String>[];
 
@@ -42,16 +40,17 @@ class _CitySelectPageState extends State<CitySelectPage> {
     final List<dynamic> list = json.decode(jsonStr) as List<dynamic>;
     list.forEach(_addCity);
     SuspensionUtil.setShowSuspensionStatus(_cityList);
-    _indexBarData = _cityList.map((CityEntity e) {
-      if (e.isShowSuspension) {
-        return e.firstCharacter;
-      } else {
-        return '';
-      }
-    }).where((String element) => element.isNotEmpty).toList();
-    setState(() {
-
-    });
+    _indexBarData = _cityList
+        .map((CityEntity e) {
+          if (e.isShowSuspension) {
+            return e.firstCharacter;
+          } else {
+            return '';
+          }
+        })
+        .where((String element) => element.isNotEmpty)
+        .toList();
+    setState(() {});
   }
 
   void _addCity(dynamic value) {
@@ -63,7 +62,7 @@ class _CitySelectPageState extends State<CitySelectPage> {
     final ByteData data = await rootBundle.load(key);
     return utf8.decode(data.buffer.asUint8List());
   }
-  
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -99,19 +98,19 @@ class _CitySelectPageState extends State<CitySelectPage> {
         height: 40.0,
         child: Container(
           decoration: BoxDecoration(
-            border: (model.isShowSuspension && model.cityCode != '0483') ? Border(
-              top: Divider.createBorderSide(context, width: 0.6),
-            ) : null
-          ),
+              border: (model.isShowSuspension && model.cityCode != '0483')
+                  ? Border(
+                      top: Divider.createBorderSide(context, width: 0.6),
+                    )
+                  : null),
           child: Row(
             children: <Widget>[
               Opacity(
-                opacity: model.isShowSuspension ? 1 : 0,
-                child: SizedBox(
-                  width: 28.0,
-                  child: Text(model.firstCharacter),
-                )
-              ),
+                  opacity: model.isShowSuspension ? 1 : 0,
+                  child: SizedBox(
+                    width: 28.0,
+                    child: Text(model.firstCharacter),
+                  )),
               Expanded(
                 child: Text(model.name),
               )

@@ -41,6 +41,7 @@ class _SplashPageState extends State<SplashPage> {
         void precacheImages(String image) {
           precacheImage(ImageUtils.getAssetImage(image, format: ImageFormat.webp), context);
         }
+
         _guideList.forEach(precacheImages);
       }
       _initSplash();
@@ -87,35 +88,29 @@ class _SplashPageState extends State<SplashPage> {
   @override
   Widget build(BuildContext context) {
     return Material(
-      color: context.backgroundColor,
-      child: _status == 0 ?
-      const FractionallyAlignedSizedBox(
-        heightFactor: 0.3,
-        widthFactor: 0.33,
-        leftFactor: 0.33,
-        bottomFactor: 0,
-        child: LoadAssetImage('logo')
-      ) :
-      Swiper(
-        key: const Key('swiper'),
-        itemCount: _guideList.length,
-        loop: false,
-        itemBuilder: (_, index) {
-          return LoadAssetImage(
-            _guideList[index],
-            key: Key(_guideList[index]),
-            fit: BoxFit.cover,
-            width: double.infinity,
-            height: double.infinity,
-            format: ImageFormat.webp,
-          );
-        },
-        onTap: (index) {
-          if (index == _guideList.length - 1) {
-            _goLogin();
-          }
-        },
-      )
-    );
+        color: context.backgroundColor,
+        child: _status == 0
+            ? const FractionallyAlignedSizedBox(
+                heightFactor: 0.3, widthFactor: 0.33, leftFactor: 0.33, bottomFactor: 0, child: LoadAssetImage('logo'))
+            : Swiper(
+                key: const Key('swiper'),
+                itemCount: _guideList.length,
+                loop: false,
+                itemBuilder: (_, index) {
+                  return LoadAssetImage(
+                    _guideList[index],
+                    key: Key(_guideList[index]),
+                    fit: BoxFit.cover,
+                    width: double.infinity,
+                    height: double.infinity,
+                    format: ImageFormat.webp,
+                  );
+                },
+                onTap: (index) {
+                  if (index == _guideList.length - 1) {
+                    _goLogin();
+                  }
+                },
+              ));
   }
 }

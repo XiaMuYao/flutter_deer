@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_deer/demo/navigator/book_entity.dart';
 
 class BooksListScreen extends StatelessWidget {
-
   const BooksListScreen({
     super.key,
     required this.books,

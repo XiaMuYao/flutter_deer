@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_deer/res/colors.dart';
 import 'package:flutter_deer/res/gaps.dart';
@@ -7,7 +6,6 @@ import 'package:flutter_deer/widgets/load_image.dart';
 import 'package:scratcher/scratcher.dart';
 
 class ScratchCardDemoPage extends StatefulWidget {
-
   const ScratchCardDemoPage({super.key});
 
   @override
@@ -15,7 +13,6 @@ class ScratchCardDemoPage extends StatefulWidget {
 }
 
 class _ScratchCardDemoPageState extends State<ScratchCardDemoPage> {
-
   final GlobalKey<ScratcherState> scratchKey = GlobalKey<ScratcherState>();
 
   @override
@@ -46,7 +43,9 @@ class _ScratchCardDemoPageState extends State<ScratchCardDemoPage> {
               color: Colors.white,
               height: 200,
               width: 300,
-              child: const LoadAssetImage('logo',),
+              child: const LoadAssetImage(
+                'logo',
+              ),
             ),
           ),
           Gaps.vGap50,

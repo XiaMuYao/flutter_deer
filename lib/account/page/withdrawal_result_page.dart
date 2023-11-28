@@ -7,7 +7,6 @@ import 'package:flutter_deer/widgets/my_button.dart';
 
 /// design/6店铺-账户/index.html#artboard5
 class WithdrawalResultPage extends StatefulWidget {
-
   const WithdrawalResultPage({super.key});
 
   @override
@@ -26,7 +25,8 @@ class _WithdrawalResultPageState extends State<WithdrawalResultPage> {
         child: Column(
           children: <Widget>[
             Gaps.vGap50,
-            const LoadAssetImage('account/sqsb',
+            const LoadAssetImage(
+              'account/sqsb',
               width: 80.0,
               height: 80.0,
             ),

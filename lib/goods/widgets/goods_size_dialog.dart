@@ -5,21 +5,18 @@ import 'package:flutter_deer/widgets/base_dialog.dart';
 
 /// design/4商品/index.html#artboard10
 class GoodsSizeDialog extends StatefulWidget {
-
   const GoodsSizeDialog({
     super.key,
     this.onPressed,
   });
 
   final void Function(String)? onPressed;
-  
+
   @override
   _GoodsSizeDialog createState() => _GoodsSizeDialog();
-  
 }
 
 class _GoodsSizeDialog extends State<GoodsSizeDialog> {
-
   final TextEditingController _controller = TextEditingController();
 
   @override
@@ -27,7 +24,7 @@ class _GoodsSizeDialog extends State<GoodsSizeDialog> {
     _controller.dispose();
     super.dispose();
   }
-  
+
   @override
   Widget build(BuildContext context) {
     return BaseDialog(

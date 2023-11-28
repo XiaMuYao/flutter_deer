@@ -16,28 +16,28 @@ import 'package:provider/provider.dart';
 
 /// design/3订单/index.html#artboard8
 class OrderSearchPage extends StatefulWidget {
-
   const OrderSearchPage({super.key});
 
   @override
   _OrderSearchPageState createState() => _OrderSearchPageState();
 }
 
-class _OrderSearchPageState extends State<OrderSearchPage> with BasePageMixin<OrderSearchPage, PowerPresenter<dynamic>> implements OrderSearchIMvpView, ShopIMvpView {
-
+class _OrderSearchPageState extends State<OrderSearchPage>
+    with BasePageMixin<OrderSearchPage, PowerPresenter<dynamic>>
+    implements OrderSearchIMvpView, ShopIMvpView {
   @override
   BaseListProvider<SearchItems> provider = BaseListProvider<SearchItems>();
-  
+
   late String _keyword;
   int _page = 1;
-  
+
   @override
   void initState() {
     /// 默认为加载中状态，本页面场景默认为空
     provider.stateType = StateType.empty;
     super.initState();
   }
-  
+
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider<BaseListProvider<SearchItems>>(
@@ -56,26 +56,24 @@ class _OrderSearchPageState extends State<OrderSearchPage> with BasePageMixin<Or
             _orderSearchPresenter.search(_keyword, _page, true);
           },
         ),
-        body: Consumer<BaseListProvider<SearchItems>>(
-          builder: (_, provider, __) {
-            return DeerListView(
-              key: const Key('order_search_list'),
-              itemCount: provider.list.length,
-              stateType: provider.stateType,
-              onRefresh: _onRefresh,
-              loadMore: _loadMore,
-              itemExtent: 50.0,
-              hasMore: provider.hasMore,
-              itemBuilder: (_, index) {
-                return Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                  alignment: Alignment.centerLeft,
-                  child: Text(provider.list[index].name.nullSafe),
-                );
-              },
-            );
-          }
-        ),
+        body: Consumer<BaseListProvider<SearchItems>>(builder: (_, provider, __) {
+          return DeerListView(
+            key: const Key('order_search_list'),
+            itemCount: provider.list.length,
+            stateType: provider.stateType,
+            onRefresh: _onRefresh,
+            loadMore: _loadMore,
+            itemExtent: 50.0,
+            hasMore: provider.hasMore,
+            itemBuilder: (_, index) {
+              return Container(
+                padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                alignment: Alignment.centerLeft,
+                child: Text(provider.list[index].name.nullSafe),
+              );
+            },
+          );
+        }),
       ),
     );
   }
@@ -109,5 +107,4 @@ class _OrderSearchPageState extends State<OrderSearchPage> with BasePageMixin<Or
   void setUser(UserEntity? user) {
     showToast(user?.name ?? '');
   }
-
 }

@@ -16,26 +16,26 @@ import 'package:provider/provider.dart';
 
 /// design/6店铺-账户/index.html#artboard0
 class ShopPage extends StatefulWidget {
-
   const ShopPage({
     super.key,
     this.isAccessibilityTest = false,
   });
 
   final bool isAccessibilityTest;
-  
+
   @override
   _ShopPageState createState() => _ShopPageState();
 }
 
-class _ShopPageState extends State<ShopPage> with BasePageMixin<ShopPage, ShopPagePresenter>, AutomaticKeepAliveClientMixin<ShopPage> implements ShopIMvpView {
-  
+class _ShopPageState extends State<ShopPage>
+    with BasePageMixin<ShopPage, ShopPagePresenter>, AutomaticKeepAliveClientMixin<ShopPage>
+    implements ShopIMvpView {
   final List<String> _menuTitle = ['账户流水', '资金管理', '提现账号'];
   final List<String> _menuImage = ['zhls', 'zjgl', 'txzh'];
   final List<String> _menuDarkImage = ['dark_zhls', 'dark_zjgl', 'dark_txzh'];
 
   UserProvider provider = UserProvider();
-  
+
   @override
   void setUser(UserEntity? user) {
     provider.setUser(user);
@@ -43,15 +43,15 @@ class _ShopPageState extends State<ShopPage> with BasePageMixin<ShopPage, ShopPa
 
   @override
   bool get isAccessibilityTest => widget.isAccessibilityTest;
-  
+
   @override
   Widget build(BuildContext context) {
     super.build(context);
     final Color? iconColor = ThemeUtils.getIconColor(context);
     final Widget line = Container(
-      height: 0.6, 
-      width: double.infinity, 
-      margin: const EdgeInsets.only(left: 16.0), 
+      height: 0.6,
+      width: double.infinity,
+      margin: const EdgeInsets.only(left: 16.0),
       child: Gaps.line,
     );
     return ChangeNotifierProvider<UserProvider>(
@@ -123,7 +123,11 @@ class _ShopPageState extends State<ShopPage> with BasePageMixin<ShopPage, ShopPa
                 left: 0.0,
                 child: Row(
                   children: <Widget>[
-                    LoadAssetImage('shop/zybq', width: 40.0, height: 16.0,),
+                    LoadAssetImage(
+                      'shop/zybq',
+                      width: 40.0,
+                      height: 16.0,
+                    ),
                     Gaps.hGap8,
                     Text('店铺账号:15000000000', style: TextStyles.textSize12)
                   ],
@@ -167,6 +171,7 @@ class _ShopPageState extends State<ShopPage> with BasePageMixin<ShopPage, ShopPa
                 ),
               ),
             ),
+
             /// 使用Flexible防止溢出
             Flexible(
               child: _ShopFunctionModule(
@@ -189,23 +194,21 @@ class _ShopPageState extends State<ShopPage> with BasePageMixin<ShopPage, ShopPa
 
   @override
   ShopPagePresenter createPresenter() => ShopPagePresenter();
- 
 }
 
 class _ShopFunctionModule extends StatelessWidget {
-
   const _ShopFunctionModule({
     required this.onItemClick,
     required this.data,
     required this.image,
     required this.darkImage,
   });
-  
+
   final void Function(int index) onItemClick;
   final List<String> data;
   final List<String> image;
   final List<String> darkImage;
-  
+
   @override
   Widget build(BuildContext context) {
     return GridView.builder(

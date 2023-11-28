@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_deer/demo/navigator/book_entity.dart';
 
 class BooksAppState extends ChangeNotifier {
-
   BooksAppState() : _selectedIndex = 0;
 
   late int _selectedIndex;

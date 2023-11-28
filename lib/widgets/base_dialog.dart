@@ -6,14 +6,7 @@ import 'package:flutter_deer/widgets/my_button.dart';
 
 /// 自定义dialog的模板
 class BaseDialog extends StatelessWidget {
-
-  const BaseDialog({
-    super.key,
-    this.title,
-    this.onPressed,
-    this.hiddenTitle = false,
-    required this.child
-  });
+  const BaseDialog({super.key, this.title, this.onPressed, this.hiddenTitle = false, required this.child});
 
   final String? title;
   final VoidCallback? onPressed;
@@ -22,7 +15,6 @@ class BaseDialog extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     final Widget dialogTitle = Visibility(
       visible: !hiddenTitle,
       child: Padding(
@@ -53,7 +45,7 @@ class BaseDialog extends StatelessWidget {
         ),
       ],
     );
-    
+
     final Widget content = Material(
       borderRadius: BorderRadius.circular(8.0),
       child: Column(
@@ -104,17 +96,16 @@ class BaseDialog extends StatelessWidget {
 }
 
 class _DialogButton extends StatelessWidget {
-  
   const _DialogButton({
     required this.text,
     this.textColor,
     this.onPressed,
   });
-  
+
   final String text;
   final Color? textColor;
   final VoidCallback? onPressed;
-  
+
   @override
   Widget build(BuildContext context) {
     return Expanded(

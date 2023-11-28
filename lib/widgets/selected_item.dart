@@ -2,15 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_deer/res/resources.dart';
 
 class SelectedItem extends StatelessWidget {
-
-  const SelectedItem({
-    super.key,
-    this.onTap,
-    required this.title,
-    this.content = '',
-    this.textAlign = TextAlign.start,
-    this.style
-  });
+  const SelectedItem(
+      {super.key, this.onTap, required this.title, this.content = '', this.textAlign = TextAlign.start, this.style});
 
   final GestureTapCallback? onTap;
   final String title;
@@ -36,13 +29,7 @@ class SelectedItem extends StatelessWidget {
             Text(title),
             Gaps.hGap16,
             Expanded(
-              child: Text(
-                content,
-                maxLines: 2,
-                textAlign: textAlign,
-                overflow: TextOverflow.ellipsis,
-                style: style
-              ),
+              child: Text(content, maxLines: 2, textAlign: textAlign, overflow: TextOverflow.ellipsis, style: style),
             ),
             Gaps.hGap8,
             Images.arrowRight

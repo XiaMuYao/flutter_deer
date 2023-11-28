@@ -6,7 +6,6 @@ import 'package:flutter_deer/widgets/my_app_bar.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 class WebViewPage extends StatefulWidget {
-
   const WebViewPage({
     super.key,
     required this.title,
@@ -15,13 +14,12 @@ class WebViewPage extends StatefulWidget {
 
   final String title;
   final String url;
-  
+
   @override
   _WebViewPageState createState() => _WebViewPageState();
 }
 
 class _WebViewPageState extends State<WebViewPage> {
-
   late final WebViewController _controller;
   int _progressValue = 0;
 
@@ -67,15 +65,17 @@ class _WebViewPageState extends State<WebViewPage> {
             WebViewWidget(
               controller: _controller,
             ),
-            if (_progressValue != 100) LinearProgressIndicator(
-              value: _progressValue / 100,
-              backgroundColor: Colors.transparent,
-              minHeight: 2,
-            ) else Gaps.empty,
+            if (_progressValue != 100)
+              LinearProgressIndicator(
+                value: _progressValue / 100,
+                backgroundColor: Colors.transparent,
+                minHeight: 2,
+              )
+            else
+              Gaps.empty,
           ],
         ),
       ),
     );
   }
-
 }

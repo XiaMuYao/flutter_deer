@@ -7,7 +7,6 @@ import 'package:flutter_deer/widgets/base_dialog.dart';
 
 /// design/7店铺-店铺配置/index.html#artboard1
 class RangePriceInputDialog extends StatefulWidget {
-
   const RangePriceInputDialog({
     super.key,
     this.title,
@@ -16,14 +15,12 @@ class RangePriceInputDialog extends StatefulWidget {
 
   final String? title;
   final void Function(String, String) onPressed;
-  
+
   @override
   _RangePriceInputDialog createState() => _RangePriceInputDialog();
-  
 }
 
 class _RangePriceInputDialog extends State<RangePriceInputDialog> {
-
   final TextEditingController _controller = TextEditingController();
   final TextEditingController _controller1 = TextEditingController();
 
@@ -33,7 +30,7 @@ class _RangePriceInputDialog extends State<RangePriceInputDialog> {
     _controller1.dispose();
     super.dispose();
   }
-  
+
   @override
   Widget build(BuildContext context) {
     return BaseDialog(
@@ -51,12 +48,11 @@ class _RangePriceInputDialog extends State<RangePriceInputDialog> {
               child: _buildTextField(_controller),
             ),
             Container(
-              alignment: Alignment.center,
-              padding: const EdgeInsets.symmetric(horizontal: 12.0),
-              color: context.dialogBackgroundColor,
-              height: double.infinity,
-              child: const Text('至')
-            ),
+                alignment: Alignment.center,
+                padding: const EdgeInsets.symmetric(horizontal: 12.0),
+                color: context.dialogBackgroundColor,
+                height: double.infinity,
+                child: const Text('至')),
             Expanded(
               child: _buildTextField(_controller1),
             ),

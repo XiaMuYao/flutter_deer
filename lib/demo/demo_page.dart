@@ -11,9 +11,7 @@ import 'package:flutter_deer/util/app_navigator.dart';
 import 'package:flutter_deer/widgets/click_item.dart';
 import 'package:flutter_deer/widgets/my_app_bar.dart';
 
-
 class DemoPage extends StatefulWidget {
-
   const DemoPage({super.key});
 
   @override
@@ -21,7 +19,6 @@ class DemoPage extends StatefulWidget {
 }
 
 class _DemoPageState extends State<DemoPage> {
-
   @override
   void initState() {
     super.initState();

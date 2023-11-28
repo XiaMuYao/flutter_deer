@@ -20,7 +20,6 @@ Future<T?> showPopupWindow<T>({
   String? semanticLabel,
   bool isShowBg = false,
 }) {
-
   switch (defaultTargetPlatform) {
     case TargetPlatform.iOS:
     case TargetPlatform.macOS:
@@ -49,14 +48,14 @@ Future<T?> showPopupWindow<T>({
     Rect.fromPoints(a, b),
     Offset.zero & overlay!.size,
   );
-  return Navigator.push(context,
+  return Navigator.push(
+      context,
       _PopupWindowRoute(
-        position: position,
-        child: child,
-        semanticLabel: semanticLabel,
-        barrierLabel: MaterialLocalizations.of(context).modalBarrierDismissLabel,
-        isShowBg: isShowBg
-      ));
+          position: position,
+          child: child,
+          semanticLabel: semanticLabel,
+          barrierLabel: MaterialLocalizations.of(context).modalBarrierDismissLabel,
+          isShowBg: isShowBg));
 }
 
 ///自定义弹窗路由：参照_PopupMenuRoute修改的
@@ -74,7 +73,7 @@ class _PopupWindowRoute<T> extends PopupRoute<T> {
   final RelativeRect position;
   final String? semanticLabel;
   final bool isShowBg;
-  
+
   @override
   Color? get barrierColor => null;
 
@@ -90,14 +89,11 @@ class _PopupWindowRoute<T> extends PopupRoute<T> {
   @override
   Animation<double> createAnimation() {
     return CurvedAnimation(
-        parent: super.createAnimation(),
-        curve: Curves.linear,
-        reverseCurve: const Interval(0.0, _kWindowCloseIntervalEnd));
+        parent: super.createAnimation(), curve: Curves.linear, reverseCurve: const Interval(0.0, _kWindowCloseIntervalEnd));
   }
 
   @override
-  Widget buildPage(BuildContext context, Animation<double> animation,
-      Animation<double> secondaryAnimation) {
+  Widget buildPage(BuildContext context, Animation<double> animation, Animation<double> secondaryAnimation) {
     final Widget win = _PopupWindow<T>(
       route: this,
       semanticLabel: semanticLabel,
@@ -120,9 +116,7 @@ class _PopupWindowRoute<T> extends PopupRoute<T> {
                 height: double.infinity,
                 color: isShowBg ? const Color(0x99000000) : null,
                 child: CustomSingleChildLayout(
-                  delegate: _PopupWindowLayoutDelegate(
-                    position, Directionality.of(context)
-                  ),
+                  delegate: _PopupWindowLayoutDelegate(position, Directionality.of(context)),
                   child: win,
                 ),
               ),
@@ -148,8 +142,7 @@ class _PopupWindow<T> extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     const double length = 10.0;
-    const double unit = 1.0 /
-        (length + 1.5); // 1.0 for the width and 0.5 for the last item's fade.
+    const double unit = 1.0 / (length + 1.5); // 1.0 for the width and 0.5 for the last item's fade.
 
     final CurveTween opacity = CurveTween(curve: const Interval(0.0, 1.0 / 3.0));
     final CurveTween width = CurveTween(curve: const Interval(0.0, unit));
@@ -185,8 +178,7 @@ class _PopupWindow<T> extends StatelessWidget {
 
 ///自定义委托内容：子控件大小及其位置计算
 class _PopupWindowLayoutDelegate extends SingleChildLayoutDelegate {
-  _PopupWindowLayoutDelegate(
-      this.position, this.textDirection);
+  _PopupWindowLayoutDelegate(this.position, this.textDirection);
 
   final RelativeRect position;
   final TextDirection textDirection;
@@ -195,8 +187,8 @@ class _PopupWindowLayoutDelegate extends SingleChildLayoutDelegate {
   BoxConstraints getConstraintsForChild(BoxConstraints constraints) {
     // The menu can be at most the size of the overlay minus 8.0 pixels in each
     // direction.
-    return BoxConstraints.loose(constraints.biggest -
-        const Offset(_kWindowScreenPadding * 2.0, _kWindowScreenPadding * 2.0) as Size);
+    return BoxConstraints.loose(
+        constraints.biggest - const Offset(_kWindowScreenPadding * 2.0, _kWindowScreenPadding * 2.0) as Size);
   }
 
   @override

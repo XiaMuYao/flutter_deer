@@ -9,10 +9,8 @@ import 'package:flutter_deer/widgets/my_app_bar.dart';
 import 'package:flutter_deer/widgets/my_button.dart';
 import 'package:flutter_deer/widgets/my_scroll_view.dart';
 
-
 /// design/1注册登录/index.html#artboard13
 class UpdatePasswordPage extends StatefulWidget {
-
   const UpdatePasswordPage({super.key});
 
   @override
@@ -37,7 +35,7 @@ class _UpdatePasswordPageState extends State<UpdatePasswordPage> with ChangeNoti
       _nodeText2: null,
     };
   }
-  
+
   void _verify() {
     final String oldPwd = _oldPwdController.text;
     final String newPwd = _newPwdController.text;
@@ -54,12 +52,12 @@ class _UpdatePasswordPageState extends State<UpdatePasswordPage> with ChangeNoti
       });
     }
   }
-  
+
   void _confirm() {
     Toast.show('修改成功！');
     NavigatorUtils.goBack(context);
   }
-  
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

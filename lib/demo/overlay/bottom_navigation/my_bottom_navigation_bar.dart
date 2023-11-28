@@ -1,8 +1,6 @@
-
 import 'package:flutter/material.dart';
 
 class MyBottomNavigationBar extends StatefulWidget {
-
   const MyBottomNavigationBar({
     super.key,
     this.selectedPosition = 0,
@@ -14,29 +12,36 @@ class MyBottomNavigationBar extends StatefulWidget {
   final int selectedPosition;
   final bool isShowIndicator;
   final void Function(int selectedPosition) selectedCallback;
-  
+
   @override
   _MyBottomNavigationBarState createState() => _MyBottomNavigationBarState();
 }
 
 class _MyBottomNavigationBarState extends State<MyBottomNavigationBar> with TickerProviderStateMixin {
-  
   /// BottomNavigationBar高度
   double barHeight = 56.0;
+
   /// 指示器高度
   double indicatorHeight = 44.0;
+
   /// 选中图标颜色
   Color selectedIconColor = Colors.blue;
+
   /// 默认图标颜色
   Color normalIconColor = Colors.grey;
+
   /// 选中下标
   int selectedPosition = 0;
+
   /// 记录上一次的选中下标
   int previousSelectedPosition = 0;
+
   /// 选中图标高度
   double selectedIconHeight = 38.0;
+
   /// 默认图标高度
   double normalIconHeight = 32.0;
+
   /// 图标
   List<IconData> iconList = [Icons.image, Icons.add, Icons.access_alarms, Icons.settings];
 
@@ -44,7 +49,7 @@ class _MyBottomNavigationBarState extends State<MyBottomNavigationBar> with Tick
 
   late AnimationController controller;
   late Animation<double> animation;
-  
+
   @override
   void initState() {
     super.initState();
@@ -52,10 +57,10 @@ class _MyBottomNavigationBarState extends State<MyBottomNavigationBar> with Tick
       itemWidth = (context.size!.width - barHeight) / 3;
       setState(() {});
     });
-    
+
     /// 设置动画时长
     controller = AnimationController(vsync: this, duration: const Duration(milliseconds: 333));
-    
+
     if (widget.isShowIndicator) {
       selectedPosition = widget.selectedPosition;
       previousSelectedPosition = widget.selectedPosition;
@@ -67,7 +72,7 @@ class _MyBottomNavigationBarState extends State<MyBottomNavigationBar> with Tick
   @override
   Widget build(BuildContext context) {
     final children = <Widget>[];
-    
+
     /// 背景
     final background = Container(
       height: barHeight,
@@ -83,9 +88,11 @@ class _MyBottomNavigationBarState extends State<MyBottomNavigationBar> with Tick
     children.add(background);
 
     if (itemWidth == 0) {
-      return Stack(children: children,);
+      return Stack(
+        children: children,
+      );
     }
-    
+
     if (widget.isShowIndicator) {
       /// 指示器
       children.add(Positioned(
@@ -121,7 +128,10 @@ class _MyBottomNavigationBarState extends State<MyBottomNavigationBar> with Tick
               shape: BoxShape.circle,
               color: (i == selectedPosition && widget.isShowIndicator) ? selectedIconColor : normalIconColor,
             ),
-            child: Icon(iconList[i], color: Colors.white,),
+            child: Icon(
+              iconList[i],
+              color: Colors.white,
+            ),
           ),
           onTap: () {
             _selectedPosition(i);
@@ -129,8 +139,10 @@ class _MyBottomNavigationBarState extends State<MyBottomNavigationBar> with Tick
         ),
       ));
     }
-    
-    return Stack(children: children,);
+
+    return Stack(
+      children: children,
+    );
   }
 
   void _selectedPosition(int position) {
@@ -140,6 +152,7 @@ class _MyBottomNavigationBarState extends State<MyBottomNavigationBar> with Tick
       previousSelectedPosition = selectedPosition;
     }
     selectedPosition = position;
+
     /// 执行动画
     animation = Tween(begin: previousSelectedPosition.toDouble(), end: selectedPosition.toDouble())
         .animate(CurvedAnimation(parent: controller, curve: Curves.linear));
@@ -147,7 +160,7 @@ class _MyBottomNavigationBarState extends State<MyBottomNavigationBar> with Tick
       setState(() {});
     });
     controller.forward(from: 0.0);
-    
+
     widget.selectedCallback(selectedPosition);
   }
 

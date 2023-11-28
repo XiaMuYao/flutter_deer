@@ -10,10 +10,8 @@ import 'package:flutter_deer/widgets/my_button.dart';
 
 import 'menu_reveal.dart';
 
-
 /// design/4商品/index.html#artboard1
 class GoodsItem extends StatelessWidget {
-  
   const GoodsItem({
     super.key,
     required this.item,
@@ -38,7 +36,7 @@ class GoodsItem extends StatelessWidget {
   final VoidCallback onTapMenuClose;
   final Animation<double> animation;
   final String heroTag;
-  
+
   @override
   Widget build(BuildContext context) {
     final Row child = Row(
@@ -116,7 +114,7 @@ class GoodsItem extends StatelessWidget {
         )
       ],
     );
-    
+
     return Stack(
       children: <Widget>[
         // item间的分隔线
@@ -138,19 +136,15 @@ class GoodsItem extends StatelessWidget {
       ],
     );
   }
-  
+
   Widget _buildGoodsMenu(BuildContext context) {
     return Positioned.fill(
       child: AnimatedBuilder(
-        animation: animation,
-        child: _buildGoodsMenuContent(context),
-        builder: (_, Widget? child) {
-          return MenuReveal(
-            revealPercent: animation.value,
-            child: child!
-          );
-        }
-      ),
+          animation: animation,
+          child: _buildGoodsMenuContent(context),
+          builder: (_, Widget? child) {
+            return MenuReveal(revealPercent: animation.value, child: child!);
+          }),
     );
   }
 
@@ -211,7 +205,6 @@ class GoodsItem extends StatelessWidget {
 }
 
 class _GoodsItemTag extends StatelessWidget {
-  
   const _GoodsItemTag({
     required this.color,
     required this.text,
@@ -219,7 +212,7 @@ class _GoodsItemTag extends StatelessWidget {
 
   final Color? color;
   final String text;
-  
+
   @override
   Widget build(BuildContext context) {
     return Container(

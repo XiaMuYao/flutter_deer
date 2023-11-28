@@ -3,7 +3,6 @@
 // found in the LICENSE file.
 import 'package:flutter/material.dart';
 
-
 /// The part of a material design [AppBar] that expands and collapses.
 ///
 /// Most commonly used in in the [SliverAppBar.flexibleSpace] field, a flexible
@@ -211,9 +210,7 @@ class _FlexibleSpaceBarState extends State<MyFlexibleSpaceBar> {
       if (opacity > 0.0) {
         TextStyle titleStyle = theme.primaryTextTheme.titleLarge!;
         titleStyle = titleStyle.copyWith(
-            color: titleStyle.color!.withOpacity(opacity),
-            fontWeight: t != 0 ? FontWeight.normal : FontWeight.bold
-        );
+            color: titleStyle.color!.withOpacity(opacity), fontWeight: t != 0 ? FontWeight.normal : FontWeight.bold);
         final bool effectiveCenterTitle = _getEffectiveCenterTitle(theme);
         final EdgeInsetsGeometry padding = widget.titlePadding ??
             EdgeInsetsDirectional.only(
@@ -223,7 +220,8 @@ class _FlexibleSpaceBarState extends State<MyFlexibleSpaceBar> {
         final double scaleValue = Tween<double>(begin: 1.5, end: 1.0).transform(t);
         final double width = (size.width - 32.0) / 2 - _offset;
         final Matrix4 scaleTransform = Matrix4.identity()
-          ..scale(scaleValue, scaleValue, 1.0)..translate(t * width);
+          ..scale(scaleValue, scaleValue, 1.0)
+          ..translate(t * width);
         final Alignment titleAlignment = _getTitleAlignment(false);
         children.add(Container(
           padding: padding,

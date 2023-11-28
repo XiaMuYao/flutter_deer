@@ -5,7 +5,6 @@ import 'package:flutter_deer/util/input_formatter/number_text_input_formatter.da
 
 /// 封装输入框
 class TextFieldItem extends StatelessWidget {
-
   const TextFieldItem({
     super.key,
     this.controller,
@@ -47,7 +46,7 @@ class TextFieldItem extends StatelessWidget {
         Gaps.hGap16
       ],
     );
-    
+
     return Container(
       height: 50.0,
       margin: const EdgeInsets.only(left: 16.0),

@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 
 /// 记录路由，便于清空路由栈
@@ -19,5 +18,4 @@ class MyNavigatorObserver extends NavigatorObserver {
     list.remove(route);
     debugPrint(list.length.toString());
   }
-
 }

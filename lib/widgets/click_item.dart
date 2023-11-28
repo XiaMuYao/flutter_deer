@@ -2,15 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_deer/res/resources.dart';
 
 class ClickItem extends StatelessWidget {
-
-  const ClickItem({
-    super.key,
-    this.onTap,
-    required this.title,
-    this.content = '',
-    this.textAlign = TextAlign.start,
-    this.maxLines = 1
-  });
+  const ClickItem(
+      {super.key, this.onTap, required this.title, this.content = '', this.textAlign = TextAlign.start, this.maxLines = 1});
 
   final GestureTapCallback? onTap;
   final String title;
@@ -48,7 +41,7 @@ class ClickItem extends StatelessWidget {
         )
       ],
     );
-    
+
     /// 分隔线
     child = Container(
       margin: const EdgeInsets.only(left: 15.0),
@@ -64,7 +57,7 @@ class ClickItem extends StatelessWidget {
       ),
       child: child,
     );
-    
+
     return InkWell(
       onTap: onTap,
       child: child,

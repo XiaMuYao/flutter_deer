@@ -11,7 +11,6 @@ extension ThemeModeExtension on ThemeMode {
 }
 
 class ThemeProvider extends ChangeNotifier {
-
   void syncTheme() {
     final String theme = SpUtil.getString(Constant.theme) ?? '';
     if (theme.isNotEmpty && theme != ThemeMode.system.value) {
@@ -24,9 +23,9 @@ class ThemeProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  ThemeMode getThemeMode(){
+  ThemeMode getThemeMode() {
     final String theme = SpUtil.getString(Constant.theme) ?? '';
-    switch(theme) {
+    switch (theme) {
       case 'Dark':
         return ThemeMode.dark;
       case 'Light':
@@ -75,17 +74,12 @@ class ThemeProvider extends ChangeNotifier {
         color: isDarkMode ? Colours.dark_bg_color : Colors.white,
         systemOverlayStyle: isDarkMode ? SystemUiOverlayStyle.light : SystemUiOverlayStyle.dark,
       ),
-      dividerTheme: DividerThemeData(
-        color: isDarkMode ? Colours.dark_line : Colours.line,
-        space: 0.6,
-        thickness: 0.6
-      ),
+      dividerTheme: DividerThemeData(color: isDarkMode ? Colours.dark_line : Colours.line, space: 0.6, thickness: 0.6),
       cupertinoOverrideTheme: CupertinoThemeData(
         brightness: isDarkMode ? Brightness.dark : Brightness.light,
       ),
       pageTransitionsTheme: NoTransitionsOnWeb(),
-      visualDensity: VisualDensity.standard,  // https://github.com/flutter/flutter/issues/77142
+      visualDensity: VisualDensity.standard, // https://github.com/flutter/flutter/issues/77142
     );
   }
-
 }

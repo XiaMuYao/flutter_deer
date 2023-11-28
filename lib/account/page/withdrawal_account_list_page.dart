@@ -9,7 +9,6 @@ import '../account_router.dart';
 
 /// design/6店铺-账户/index.html#artboard7
 class WithdrawalAccountListPage extends StatefulWidget {
-
   const WithdrawalAccountListPage({super.key});
 
   @override
@@ -17,10 +16,9 @@ class WithdrawalAccountListPage extends StatefulWidget {
 }
 
 class _WithdrawalAccountListPageState extends State<WithdrawalAccountListPage> {
-  
   final int _selectIndex = 0;
   final List<WithdrawalAccountModel> _list = [];
-  
+
   @override
   void initState() {
     super.initState();
@@ -28,15 +26,14 @@ class _WithdrawalAccountListPageState extends State<WithdrawalAccountListPage> {
     _list.add(WithdrawalAccountModel('尾号5236 李艺', '工商银行', 0, '123'));
     _list.add(WithdrawalAccountModel('唯鹿', '微信', 1, ''));
   }
-  
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: MyAppBar(
-        centerTitle: '选择账号',
-        actionName: '添加',
-        onPressed: () => NavigatorUtils.push(context, AccountRouter.addWithdrawalAccountPage)
-      ),
+          centerTitle: '选择账号',
+          actionName: '添加',
+          onPressed: () => NavigatorUtils.push(context, AccountRouter.addWithdrawalAccountPage)),
       body: ListView.separated(
         itemCount: _list.length,
         separatorBuilder: (_, index) => const Divider(height: 0.6),

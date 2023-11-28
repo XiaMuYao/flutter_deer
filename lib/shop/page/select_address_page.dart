@@ -7,7 +7,6 @@ import 'package:flutter_deer/widgets/my_button.dart';
 import 'package:flutter_deer/widgets/my_search_bar.dart';
 
 class AddressSelectPage extends StatefulWidget {
-
   const AddressSelectPage({super.key});
 
   @override
@@ -15,7 +14,6 @@ class AddressSelectPage extends StatefulWidget {
 }
 
 class _AddressSelectPageState extends State<AddressSelectPage> {
-  
   List<PoiSearch> _list = [];
   int _index = 0;
   final ScrollController _controller = ScrollController();
@@ -26,18 +24,19 @@ class _AddressSelectPageState extends State<AddressSelectPage> {
     _controller.dispose();
     super.dispose();
   }
-  
+
   @override
   void initState() {
     super.initState();
     Flutter2dAMap.updatePrivacy(true);
+
     /// 配置key
     Flutter2dAMap.setApiKey(
       iOSKey: '4327916279bf45a044bb53b947442387',
       webKey: '4e479545913a3a180b3cffc267dad646',
     );
   }
-  
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -60,9 +59,7 @@ class _AddressSelectPageState extends State<AddressSelectPage> {
                   _controller.animateTo(0.0, duration: const Duration(milliseconds: 10), curve: Curves.ease);
                   _index = 0;
                   _list = result;
-                  setState(() {
-                   
-                  });
+                  setState(() {});
                 },
                 onAMap2DViewCreated: (controller) {
                   _aMap2DController = controller;
@@ -71,13 +68,13 @@ class _AddressSelectPageState extends State<AddressSelectPage> {
             ),
             Expanded(
               flex: 11,
-              child: 
-//            _list.isEmpty ? 
+              child:
+//            _list.isEmpty ?
 //              Container(
 //                alignment: Alignment.center,
 //                child: CircularProgressIndicator(),
-//              ) : 
-              ListView.separated(
+//              ) :
+                  ListView.separated(
                 controller: _controller,
                 itemCount: _list.length,
                 separatorBuilder: (_, index) => const Divider(),
@@ -88,8 +85,7 @@ class _AddressSelectPageState extends State<AddressSelectPage> {
                     onTap: () {
                       _index = index;
                       _aMap2DController?.move(_list[index].latitude.nullSafe, _list[index].longitude.nullSafe);
-                      setState(() {
-                      });
+                      setState(() {});
                     },
                   );
                 },
@@ -113,7 +109,6 @@ class _AddressSelectPageState extends State<AddressSelectPage> {
 }
 
 class _AddressItem extends StatelessWidget {
-
   const _AddressItem({
     required this.date,
     this.isSelected = false,
@@ -123,7 +118,7 @@ class _AddressItem extends StatelessWidget {
   final PoiSearch date;
   final bool isSelected;
   final GestureTapCallback? onTap;
-  
+
   @override
   Widget build(BuildContext context) {
     return InkWell(

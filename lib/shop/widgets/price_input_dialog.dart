@@ -5,10 +5,8 @@ import 'package:flutter_deer/util/theme_utils.dart';
 import 'package:flutter_deer/util/toast_utils.dart';
 import 'package:flutter_deer/widgets/base_dialog.dart';
 
-
 /// design/7店铺-店铺配置/index.html#artboard3
 class PriceInputDialog extends StatefulWidget {
-
   const PriceInputDialog({
     super.key,
     this.title,
@@ -19,14 +17,12 @@ class PriceInputDialog extends StatefulWidget {
   final String? title;
   final double inputMaxPrice;
   final void Function(String) onPressed;
-  
+
   @override
   _PriceInputDialog createState() => _PriceInputDialog();
-  
 }
 
 class _PriceInputDialog extends State<PriceInputDialog> {
-
   final TextEditingController _controller = TextEditingController();
 
   @override
@@ -34,7 +30,7 @@ class _PriceInputDialog extends State<PriceInputDialog> {
     _controller.dispose();
     super.dispose();
   }
-  
+
   @override
   Widget build(BuildContext context) {
     return BaseDialog(
@@ -66,7 +62,7 @@ class _PriceInputDialog extends State<PriceInputDialog> {
       ),
       onPressed: () {
         if (_controller.text.isEmpty) {
-          Toast.show('请输入${widget.title}');         
+          Toast.show('请输入${widget.title}');
           return;
         }
         NavigatorUtils.goBack(context);

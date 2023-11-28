@@ -5,14 +5,13 @@ import 'package:flutter_deer/widgets/my_button.dart';
 
 /// design/4商品/index.html#artboard2
 class GoodsDeleteBottomSheet extends StatelessWidget {
-  
   const GoodsDeleteBottomSheet({
     super.key,
     required this.onTapDelete,
   });
 
   final VoidCallback onTapDelete;
-  
+
   @override
   Widget build(BuildContext context) {
     return Material(

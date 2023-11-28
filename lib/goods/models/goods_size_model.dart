@@ -1,12 +1,9 @@
-
 class GoodsSizeModel {
+  GoodsSizeModel(
+      this.icon, this.sizeName, this.stock, this.price, this.minSaleNum, this.reducePrice, this.charges, this.currencyPrice);
 
-  GoodsSizeModel(this.icon, this.sizeName, this.stock, 
-      this.price, this.minSaleNum, this.reducePrice,
-      this.charges, this.currencyPrice);
-
-  GoodsSizeModel.fromJsonMap(Map<String, dynamic> map):
-        icon = map['icon'] as String,
+  GoodsSizeModel.fromJsonMap(Map<String, dynamic> map)
+      : icon = map['icon'] as String,
         sizeName = map['sizeName'] as String,
         stock = map['stock'] as int,
         price = map['price'] as String,

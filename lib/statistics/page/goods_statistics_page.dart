@@ -14,7 +14,6 @@ import 'package:flutter_deer/widgets/pie_chart/pie_data.dart';
 
 /// design/5统计/index.html#artboard11
 class GoodsStatisticsPage extends StatefulWidget {
-
   const GoodsStatisticsPage({super.key});
 
   @override
@@ -22,12 +21,12 @@ class GoodsStatisticsPage extends StatefulWidget {
 }
 
 class _GoodsStatisticsPageState extends State<GoodsStatisticsPage> {
-
   late DateTime _initialDay;
   int _selectedIndex = 2;
+
   /// false 待配货 true 已配货
   bool _type = false;
-  
+
   @override
   void initState() {
     super.initState();
@@ -46,10 +45,14 @@ class _GoodsStatisticsPageState extends State<GoodsStatisticsPage> {
         Gaps.hGap12,
         Gaps.vLine,
         Gaps.hGap12,
-        _buildSelectedText(_type ? '${date.DateUtils.previousWeekToString(_initialDay)} -${date.DateUtils.apiDayFormat2(_initialDay)}' : '${_initialDay.day}日', 2),
+        _buildSelectedText(
+            _type
+                ? '${date.DateUtils.previousWeekToString(_initialDay)} -${date.DateUtils.apiDayFormat2(_initialDay)}'
+                : '${_initialDay.day}日',
+            2),
       ],
     );
-    
+
     return Scaffold(
       appBar: MyAppBar(
         actionName: _type ? '待配货' : '已配货',
@@ -70,7 +73,12 @@ class _GoodsStatisticsPageState extends State<GoodsStatisticsPage> {
               Gaps.vGap4,
               Text(_type ? '已配货' : '待配货', style: TextStyles.textBold24),
               Gaps.vGap32,
-              if (_type) time else MergeSemantics(child: time,),
+              if (_type)
+                time
+              else
+                MergeSemantics(
+                  child: time,
+                ),
               Gaps.vGap8,
               _buildChart(),
               const Text('热销商品排行', style: TextStyles.textBold18),
@@ -88,7 +96,7 @@ class _GoodsStatisticsPageState extends State<GoodsStatisticsPage> {
       ),
     );
   }
-  
+
   Widget _buildChart() {
     return AspectRatio(
       aspectRatio: 1.30,
@@ -144,17 +152,21 @@ class _GoodsStatisticsPageState extends State<GoodsStatisticsPage> {
           padding: const EdgeInsets.fromLTRB(8.0, 16.0, 16.0, 16.0),
           child: Row(
             children: <Widget>[
-              if (index <= 2) LoadAssetImage('statistic/${index == 0 ? 'champion' : index == 1 ? 'runnerup' : 'thirdplace'}', width: 40.0,) else Container(
-                alignment: Alignment.center,
-                width: 18.0,
-                height: 18.0,
-                margin: const EdgeInsets.symmetric(horizontal: 11.0),
-                decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    color: PieChart.colorList[index]
+              if (index <= 2)
+                LoadAssetImage(
+                  'statistic/${index == 0 ? 'champion' : index == 1 ? 'runnerup' : 'thirdplace'}',
+                  width: 40.0,
+                )
+              else
+                Container(
+                  alignment: Alignment.center,
+                  width: 18.0,
+                  height: 18.0,
+                  margin: const EdgeInsets.symmetric(horizontal: 11.0),
+                  decoration: BoxDecoration(shape: BoxShape.circle, color: PieChart.colorList[index]),
+                  child: Text('${index + 1}',
+                      style: const TextStyle(color: Colors.white, fontSize: Dimens.font_sp12, fontWeight: FontWeight.bold)),
                 ),
-                child: Text('${index + 1}', style: const TextStyle(color: Colors.white, fontSize: Dimens.font_sp12, fontWeight: FontWeight.bold)),
-              ),
               Gaps.hGap4,
               Container(
                 height: 36.0,
@@ -174,7 +186,10 @@ class _GoodsStatisticsPageState extends State<GoodsStatisticsPage> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: <Widget>[
-                    const Text('那鲁火多饮料', maxLines: 1, overflow: TextOverflow.ellipsis, style: TextStyle(fontWeight: FontWeight.bold, fontSize: Dimens.font_sp12)),
+                    const Text('那鲁火多饮料',
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                        style: TextStyle(fontWeight: FontWeight.bold, fontSize: Dimens.font_sp12)),
                     Text('250ml', style: Theme.of(context).textTheme.titleSmall),
                   ],
                 ),
@@ -214,11 +229,13 @@ class _GoodsStatisticsPageState extends State<GoodsStatisticsPage> {
       fontSize: Dimens.font_sp15,
       selected: _type && _selectedIndex == index,
       unSelectedTextColor: unSelectedTextColor,
-      onTap: _type ? () {
-        setState(() {
-          _selectedIndex = index;
-        });
-      } : null,
+      onTap: _type
+          ? () {
+              setState(() {
+                _selectedIndex = index;
+              });
+            }
+          : null,
     );
   }
 }

@@ -8,10 +8,8 @@ import 'package:flutter_deer/util/theme_utils.dart';
 import 'package:flutter_deer/widgets/load_image.dart';
 import 'package:provider/provider.dart';
 
-
 /// design/4商品/index.html#artboard20
 class GoodsSortBottomSheet extends StatefulWidget {
-
   const GoodsSortBottomSheet({
     super.key,
     required this.provider,
@@ -19,18 +17,18 @@ class GoodsSortBottomSheet extends StatefulWidget {
   });
 
   final void Function(String, String) onSelected;
+
   /// 临时状态
   final GoodsSortProvider provider;
-  
+
   @override
   GoodsSortBottomSheetState createState() => GoodsSortBottomSheetState();
 }
 
 class GoodsSortBottomSheetState extends State<GoodsSortBottomSheet> with SingleTickerProviderStateMixin {
-  
   TabController? _tabController;
   final ScrollController _controller = ScrollController();
-  
+
   @override
   void initState() {
     super.initState();
@@ -47,12 +45,13 @@ class GoodsSortBottomSheetState extends State<GoodsSortBottomSheet> with SingleT
     _controller.dispose();
     super.dispose();
   }
-  
+
   @override
   Widget build(BuildContext context) {
     return Material(
       child: SizedBox(
         height: context.height * 11.0 / 16.0,
+
         /// 为保留状态，选择ChangeNotifierProvider.value，销毁自己手动处理（见 goods_edit_page.dart ：dispose()）
         child: ChangeNotifierProvider<GoodsSortProvider>.value(
           value: widget.provider,
@@ -145,10 +144,13 @@ class GoodsSortBottomSheetState extends State<GoodsSortBottomSheet> with SingleT
           children: <Widget>[
             Text(
               provider.mList[index].name,
-              style: flag ? TextStyle(
-                fontSize: Dimens.font_sp14,
-                color: Theme.of(context).primaryColor,
-              ) : null,),
+              style: flag
+                  ? TextStyle(
+                      fontSize: Dimens.font_sp14,
+                      color: Theme.of(context).primaryColor,
+                    )
+                  : null,
+            ),
             Gaps.hGap8,
             Visibility(
               visible: flag,

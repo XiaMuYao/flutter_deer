@@ -9,10 +9,8 @@ import 'package:flutter_deer/widgets/my_button.dart';
 import 'package:flutter_deer/widgets/my_scroll_view.dart';
 import 'package:flutter_gen/gen_l10n/deer_localizations.dart';
 
-
 /// design/1注册登录/index.html#artboard9
 class ResetPasswordPage extends StatefulWidget {
-
   const ResetPasswordPage({super.key});
 
   @override
@@ -62,7 +60,7 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> with ChangeNotifi
       });
     }
   }
-  
+
   void _reset() {
     Toast.show(DeerLocalizations.of(context)!.confirm);
   }

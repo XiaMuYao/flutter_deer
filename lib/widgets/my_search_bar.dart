@@ -9,7 +9,6 @@ import 'load_image.dart';
 
 /// 搜索页的AppBar
 class MySearchBar extends StatefulWidget implements PreferredSizeWidget {
-
   const MySearchBar({
     super.key,
     this.hintText = '',
@@ -29,7 +28,6 @@ class MySearchBar extends StatefulWidget implements PreferredSizeWidget {
 }
 
 class _MySearchBarState extends State<MySearchBar> {
-
   final TextEditingController _controller = TextEditingController();
   final FocusNode _focus = FocusNode();
 
@@ -53,7 +51,7 @@ class _MySearchBarState extends State<MySearchBar> {
   Widget build(BuildContext context) {
     final bool isDark = context.isDark;
     final Color iconColor = isDark ? Colours.dark_text_gray : Colours.text_gray_c;
-    
+
     final Widget back = Semantics(
       label: '返回',
       child: SizedBox(
@@ -127,7 +125,10 @@ class _MySearchBarState extends State<MySearchBar> {
             border: InputBorder.none,
             icon: Padding(
               padding: const EdgeInsets.only(top: 8.0, bottom: 8.0, left: 8.0),
-              child: LoadAssetImage('order/order_search', color: iconColor,),
+              child: LoadAssetImage(
+                'order/order_search',
+                color: iconColor,
+              ),
             ),
             hintText: widget.hintText,
             suffixIcon: GestureDetector(
@@ -149,7 +150,7 @@ class _MySearchBarState extends State<MySearchBar> {
         ),
       ),
     );
-    
+
     final Widget search = MyButton(
       minHeight: 32.0,
       minWidth: 44.0,
@@ -157,12 +158,12 @@ class _MySearchBarState extends State<MySearchBar> {
       radius: 4.0,
       padding: const EdgeInsets.symmetric(horizontal: 8.0),
       text: '搜索',
-      onPressed:() {
+      onPressed: () {
         _focus.unfocus();
         widget.onPressed?.call(_controller.text);
       },
     );
-    
+
     return AnnotatedRegion<SystemUiOverlayStyle>(
       value: isDark ? SystemUiOverlayStyle.light : SystemUiOverlayStyle.dark,
       child: Material(

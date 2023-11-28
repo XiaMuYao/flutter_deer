@@ -5,7 +5,6 @@ import 'package:flutter_deer/widgets/my_card.dart';
 
 /// design/8设置/index.html#artboard2
 class MessagePage extends StatefulWidget {
-
   const MessagePage({super.key});
 
   @override
@@ -13,7 +12,6 @@ class MessagePage extends StatefulWidget {
 }
 
 class _MessagePageState extends State<MessagePage> {
-  
   final ScrollController _scrollController = ScrollController();
 
   @override
@@ -30,7 +28,8 @@ class _MessagePageState extends State<MessagePage> {
         actionName: '全部已读',
         onPressed: () {},
       ),
-      body: Scrollbar( // 加个滚动条
+      body: Scrollbar(
+        // 加个滚动条
         controller: _scrollController,
         child: ListView.builder(
           itemCount: 20,
@@ -43,7 +42,6 @@ class _MessagePageState extends State<MessagePage> {
     );
   }
 }
-
 
 class _MessageItem extends StatefulWidget {
   @override

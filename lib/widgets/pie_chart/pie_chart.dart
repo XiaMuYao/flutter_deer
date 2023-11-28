@@ -8,32 +8,33 @@ import 'package:flutter_deer/widgets/pie_chart/pie_data.dart';
 
 ///环形图 参考：https://github.com/apgapg/pie_chart
 class PieChart extends StatefulWidget {
-  
-  const PieChart({
-    super.key,
-    required this.data,
-    required this.name
-  });
-  
+  const PieChart({super.key, required this.data, required this.name});
+
   final List<PieData> data;
   final String name;
   static const List<Color> colorList = <Color>[
-    Color(0xFFFFD147), Color(0xFFA9DAF2), Color(0xFFFAAF64),
-    Color(0xFF7087FA), Color(0xFFA0E65C), Color(0xFF5CE6A1), Color(0xFFA364FA),
-    Color(0xFFDA61F2), Color(0xFFFA64AE), Color(0xFFFA6464),
+    Color(0xFFFFD147),
+    Color(0xFFA9DAF2),
+    Color(0xFFFAAF64),
+    Color(0xFF7087FA),
+    Color(0xFFA0E65C),
+    Color(0xFF5CE6A1),
+    Color(0xFFA364FA),
+    Color(0xFFDA61F2),
+    Color(0xFFFA64AE),
+    Color(0xFFFA6464),
   ];
-  
+
   @override
   _PieChartState createState() => _PieChartState();
 }
 
 class _PieChartState extends State<PieChart> with SingleTickerProviderStateMixin {
-
   late int count;
   late Animation<double> animation;
   late AnimationController controller;
   late List<PieData> oldData;
-  
+
   @override
   void initState() {
     super.initState();
@@ -78,39 +79,27 @@ class _PieChartState extends State<PieChart> with SingleTickerProviderStateMixin
       ),
       child: RepaintBoundary(
         child: AnimatedBuilder(
-          animation: animation,
-          builder: (_, Widget? child) {
-            return CustomPaint(
-              painter: PieChartPainter(
-                widget.data,
-                animation.value,
-                bgColor,
-                widget.name,
-                count
+            animation: animation,
+            builder: (_, Widget? child) {
+              return CustomPaint(
+                painter: PieChartPainter(widget.data, animation.value, bgColor, widget.name, count),
+                child: child,
+              );
+            },
+            child: Center(
+              child: ExcludeSemantics(
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: <Widget>[Text(widget.name, style: TextStyles.textBold16), Gaps.vGap4, Text('$count件')],
+                ),
               ),
-              child: child,
-            );
-          },
-          child: Center(
-            child: ExcludeSemantics(
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: <Widget>[
-                  Text(widget.name, style: TextStyles.textBold16),
-                  Gaps.vGap4,
-                  Text('$count件')
-                ],
-              ),
-            ),
-          )
-        ),
+            )),
       ),
     );
   }
 }
 
 class PieChartPainter extends CustomPainter {
-  
   PieChartPainter(this.data, double angleFactor, this.bgColor, this.name, this.count) {
     if (data.isEmpty) {
       return;
@@ -128,8 +117,8 @@ class PieChartPainter extends CustomPainter {
       // 移除“其他”后，按数量排序
       data.removeAt(10);
     }
-   
-    data.sort((PieData left,PieData right) => right.number.compareTo(left.number));
+
+    data.sort((PieData left, PieData right) => right.number.compareTo(left.number));
     // 由大到小给予颜色
     for (int i = 0; i < data.length; i++) {
       data[i].color = PieChart.colorList[i];
@@ -146,6 +135,7 @@ class PieChartPainter extends CustomPainter {
 
   late Rect mCircle;
   late Paint _mPaint;
+
   // 半径
   late double mRadius;
   late List<PieData> data;
@@ -154,12 +144,13 @@ class PieChartPainter extends CustomPainter {
   // 起始角度
   late double prevAngle;
   late Color bgColor;
-  
+
   // 总数量
   late int count;
+
   // 图表名称
   late String name;
-  
+
   @override
   void paint(Canvas canvas, Size size) {
     if (data.isEmpty) {
@@ -170,9 +161,10 @@ class PieChartPainter extends CustomPainter {
     // 圆心
     final Offset offset = Offset(size.width / 2, size.height / 2);
     mCircle = Rect.fromCircle(center: offset, radius: mRadius);
-    
+
     for (int i = 0; i < data.length; i++) {
-      _mPaint..color = data[i].color
+      _mPaint
+        ..color = data[i].color
         ..style = PaintingStyle.fill;
       canvas.drawArc(mCircle, prevAngle, totalAngle * data[i].percentage, true, _mPaint);
       prevAngle = prevAngle + totalAngle * data[i].percentage;
@@ -190,30 +182,27 @@ class PieChartPainter extends CustomPainter {
     }
 
     canvas.save();
-    _mPaint..color = bgColor
+    _mPaint
+      ..color = bgColor
       ..style = PaintingStyle.fill;
     canvas.drawCircle(offset, mRadius * 0.52, _mPaint);
-    
-    _mPaint..color = const Color(0x80FFFFFF)
+
+    _mPaint
+      ..color = const Color(0x80FFFFFF)
       ..style = PaintingStyle.stroke
       ..strokeWidth = 8.0;
     canvas.drawCircle(offset, mRadius * 0.52, _mPaint);
-    
+
     canvas.restore();
   }
 
   void drawPercentage(Canvas context, String percentage, double x, double y, Size size) {
-    final TextSpan span = TextSpan(
-        style: const TextStyle(color: Colors.white, fontSize: Dimens.font_sp12),
-        text: percentage);
-    final TextPainter tp = TextPainter(
-        text: span,
-        textAlign: TextAlign.left,
-        textDirection: TextDirection.rtl);
+    final TextSpan span = TextSpan(style: const TextStyle(color: Colors.white, fontSize: Dimens.font_sp12), text: percentage);
+    final TextPainter tp = TextPainter(text: span, textAlign: TextAlign.left, textDirection: TextDirection.rtl);
     tp.layout();
     tp.paint(context, Offset(size.width / 2 + x - (tp.width / 2), size.height / 2 + y - (tp.height / 2)));
   }
-  
+
   @override
   bool shouldRepaint(PieChartPainter oldDelegate) {
     // 由于动画需要重绘，所以返true。避免重绘，交由RepaintBoundary处理。你也可以判断动画是否执行完成来处理时候重绘
@@ -231,8 +220,10 @@ class PieChartPainter extends CustomPainter {
       final String percentage = '${(data[i].percentage * 100).toStringAsFixed(1)}%';
       final CustomPainterSemantics node = CustomPainterSemantics(
         rect: Rect.fromLTRB(
-          0, height * i,
-          size.width, height * i + height,
+          0,
+          height * i,
+          size.width,
+          height * i + height,
         ),
         properties: SemanticsProperties(
           sortKey: OrdinalSortKey(i.toDouble()),
@@ -240,7 +231,7 @@ class PieChartPainter extends CustomPainter {
           readOnly: true,
           textDirection: TextDirection.ltr,
         ),
-        tags: const <SemanticsTag> {
+        tags: const <SemanticsTag>{
           SemanticsTag('pieChart-label'),
         },
       );

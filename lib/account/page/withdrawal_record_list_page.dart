@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_deer/res/resources.dart';
 import 'package:flutter_deer/util/theme_utils.dart';
 import 'package:flutter_deer/widgets/my_app_bar.dart';
+
 import '../../order/page/order_page.dart';
 
 /// design/6店铺-账户/index.html#artboard19
 class WithdrawalRecordListPage extends StatefulWidget {
-
   const WithdrawalRecordListPage({super.key});
 
   @override
@@ -21,10 +21,7 @@ class _WithdrawalRecordListPageState extends State<WithdrawalRecordListPage> {
         title: '提现记录',
       ),
       body: CustomScrollView(
-        slivers: [
-          for (int i = 0; i < 8; i++)
-            _buildGroup(i)
-        ],
+        slivers: [for (int i = 0; i < 8; i++) _buildGroup(i)],
       ),
     );
   }
@@ -41,14 +38,15 @@ class _WithdrawalRecordListPageState extends State<WithdrawalRecordListPage> {
               color: ThemeUtils.getStickyHeaderColor(context),
               padding: const EdgeInsets.only(left: 16.0),
               child: Text('2021/06/0${index + 1}'),
-            )
-            , 34.0,
+            ),
+            34.0,
           ),
         ),
         SliverList(
-          delegate: SliverChildBuilderDelegate((_, index) {
-            return _buildItem(index);
-          },
+          delegate: SliverChildBuilderDelegate(
+            (_, index) {
+              return _buildItem(index);
+            },
             childCount: index + 1,
           ),
         ),
@@ -75,13 +73,15 @@ class _WithdrawalRecordListPageState extends State<WithdrawalRecordListPage> {
           right: 0.0,
           child: Text(
             i.isEven ? '审核失败' : '待审核',
-            style: i.isEven ? TextStyle(
-              fontSize: Dimens.font_sp12,
-              color: Theme.of(context).colorScheme.error,
-            ) : const TextStyle(
-              fontSize: Dimens.font_sp12,
-              color: Colours.orange,
-            ),
+            style: i.isEven
+                ? TextStyle(
+                    fontSize: Dimens.font_sp12,
+                    color: Theme.of(context).colorScheme.error,
+                  )
+                : const TextStyle(
+                    fontSize: Dimens.font_sp12,
+                    color: Colours.orange,
+                  ),
           ),
         ),
       ],

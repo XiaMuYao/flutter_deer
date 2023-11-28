@@ -1,16 +1,13 @@
-
 import 'package:flutter/material.dart';
-
 
 /// https://medium.com/flutter-community/neumorphic-designs-in-flutter-eab9a4de2059
 class NeumorphicContainer extends StatefulWidget {
-
   NeumorphicContainer({
     super.key,
     required this.child,
     this.bevel = 10.0,
     this.color,
-  })  : blurOffset = Offset(bevel / 2, bevel / 2);
+  }) : blurOffset = Offset(bevel / 2, bevel / 2);
 
   final Widget child;
   final double bevel;
@@ -59,18 +56,20 @@ class _NeumorphicContainerState extends State<NeumorphicContainer> {
             ],
             stops: const <double>[0.0, 0.3, 0.6, 1.0],
           ),
-          boxShadow: _isPressed ? null : <BoxShadow>[
-            BoxShadow(
-              blurRadius: widget.bevel,
-              offset: -widget.blurOffset,
-              color: color.mix(Colors.white, .6),
-            ),
-            BoxShadow(
-              blurRadius: widget.bevel,
-              offset: widget.blurOffset,
-              color: color.mix(Colors.black, .3),
-            ),
-          ],
+          boxShadow: _isPressed
+              ? null
+              : <BoxShadow>[
+                  BoxShadow(
+                    blurRadius: widget.bevel,
+                    offset: -widget.blurOffset,
+                    color: color.mix(Colors.white, .6),
+                  ),
+                  BoxShadow(
+                    blurRadius: widget.bevel,
+                    offset: widget.blurOffset,
+                    color: color.mix(Colors.black, .3),
+                  ),
+                ],
         ),
         child: widget.child,
       ),

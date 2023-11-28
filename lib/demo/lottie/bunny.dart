@@ -1,8 +1,6 @@
-
 import 'package:flutter/material.dart';
 
 class Bunny {
-
   Bunny(this.controller) {
     setNeutralState();
   }
@@ -25,7 +23,7 @@ class Bunny {
   BunnyState currentState = BunnyState.neutral;
 
   void setNeutralState() {
-    switch(currentState) {
+    switch (currentState) {
       case BunnyState.neutral:
         return;
       case BunnyState.tracking:
@@ -43,7 +41,7 @@ class Bunny {
   }
 
   void setShyState() {
-    switch(currentState) {
+    switch (currentState) {
       case BunnyState.neutral:
       case BunnyState.tracking:
         setMinMaxFrame(_neutral_to_shy);
@@ -59,7 +57,7 @@ class Bunny {
   }
 
   void setPeekState() {
-    switch(currentState) {
+    switch (currentState) {
       case BunnyState.neutral:
       case BunnyState.tracking:
         setMinMaxFrame(_neutral_to_peek);
@@ -75,7 +73,7 @@ class Bunny {
   }
 
   void setTrackingState() {
-    switch(currentState) {
+    switch (currentState) {
       case BunnyState.neutral:
         setMinMaxFrame(_tracking_to_neutral);
         break;
@@ -109,6 +107,7 @@ class Bunny {
   void setMinMaxFrame(List<int> frames) {
     /// 移动至起始帧
     controller.animateTo(framesToPercentage(frames[0]), duration: Duration.zero);
+
     /// 动画至结束帧
     controller.animateTo(framesToPercentage(frames[1]));
   }
@@ -117,16 +116,18 @@ class Bunny {
   double framesToPercentage(int frame) {
     return frame / 77;
   }
-
 }
 
 enum BunnyState {
   /// 默认状态
   neutral,
+
   /// 跟踪（文字输入）
   tracking,
+
   /// 害羞（密码不可见）
   shy,
+
   /// 偷看（密码可见）
   peek
 }

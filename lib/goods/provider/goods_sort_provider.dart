@@ -6,12 +6,13 @@ import 'package:flutter_deer/generated/json/base/json_convert_content.dart';
 import 'package:flutter_deer/goods/models/goods_sort_entity.dart';
 
 class GoodsSortProvider extends ChangeNotifier {
-
   int _index = 0;
+
   int get index => _index;
 
   // TabBar初始化3个，其中两个文字置空。
   final List<Tab> _myTabs = <Tab>[const Tab(text: '请选择'), const Tab(text: ''), const Tab(text: '')];
+
   List<Tab> get myTabs => _myTabs;
 
   List<GoodsSortEntity> _mGoodsSort = [];
@@ -20,12 +21,13 @@ class GoodsSortProvider extends ChangeNotifier {
 
   /// 当前列表数据
   List<GoodsSortEntity> _mList = [];
+
   List<GoodsSortEntity> get mList => _mList;
 
   /// 三级联动选择的position
   final List<int> _positions = [0, 0, 0];
-  List<int> get positions => _positions;
 
+  List<int> get positions => _positions;
 
   void setIndex(int index) {
     _index = index;
@@ -33,11 +35,11 @@ class GoodsSortProvider extends ChangeNotifier {
   }
 
   void indexIncrement() {
-    _index ++;
+    _index++;
   }
 
   void setList(int index) {
-    switch(index) {
+    switch (index) {
       case 0:
         _mList = _mGoodsSort;
         break;
@@ -51,7 +53,7 @@ class GoodsSortProvider extends ChangeNotifier {
   }
 
   void setListAndChangeTab() {
-    switch(index) {
+    switch (index) {
       case 1:
         _mList = _mGoodsSort1;
         _myTabs[1] = const Tab(text: '请选择');
@@ -69,7 +71,6 @@ class GoodsSortProvider extends ChangeNotifier {
   }
 
   void initData() {
-
     if (_mList.isNotEmpty) {
       return;
     }

@@ -22,7 +22,6 @@ class SMSLoginPage extends StatefulWidget {
 }
 
 class _SMSLoginPageState extends State<SMSLoginPage> with ChangeNotifierMixin<SMSLoginPage> {
-
   final TextEditingController _phoneController = TextEditingController();
   final TextEditingController _vCodeController = TextEditingController();
   final FocusNode _nodeText1 = FocusNode();
@@ -117,7 +116,9 @@ class _SMSLoginPageState extends State<SMSLoginPage> with ChangeNotifierMixin<SM
                     NavigatorUtils.push(context, LoginRouter.registerPage);
                   },
               ),
-              TextSpan(text: Utils.getCurrLocale() == 'zh' ? '。' : '.',),
+              TextSpan(
+                text: Utils.getCurrLocale() == 'zh' ? '。' : '.',
+              ),
             ],
           ),
         ),

@@ -13,9 +13,7 @@ import 'page/withdrawal_password_page.dart';
 import 'page/withdrawal_record_list_page.dart';
 import 'page/withdrawal_result_page.dart';
 
-
-class AccountRouter implements IRouterProvider{
-
+class AccountRouter implements IRouterProvider {
   static String accountPage = '/account';
   static String accountRecordListPage = '/account/recordList';
   static String addWithdrawalAccountPage = '/account/addWithdrawal';
@@ -27,7 +25,7 @@ class AccountRouter implements IRouterProvider{
   static String withdrawalPasswordPage = '/account/withdrawalPassword';
   static String withdrawalRecordListPage = '/account/withdrawalRecordList';
   static String withdrawalResultPage = '/account/withdrawalResult';
-  
+
   @override
   void initRouter(FluroRouter router) {
     router.define(accountPage, handler: Handler(handlerFunc: (_, __) => const AccountPage()));
@@ -45,5 +43,4 @@ class AccountRouter implements IRouterProvider{
     router.define(withdrawalRecordListPage, handler: Handler(handlerFunc: (_, __) => const WithdrawalRecordListPage()));
     router.define(withdrawalResultPage, handler: Handler(handlerFunc: (_, __) => const WithdrawalResultPage()));
   }
-  
 }

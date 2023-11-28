@@ -3,10 +3,8 @@ import 'package:flutter/services.dart';
 import 'package:flutter_deer/routers/fluro_navigator.dart';
 import 'package:flutter_deer/widgets/my_app_bar.dart';
 
-
 /// design/7店铺-店铺配置/index.html#artboard13
 class InputTextPage extends StatefulWidget {
-
   const InputTextPage({
     super.key,
     required this.title,
@@ -19,13 +17,12 @@ class InputTextPage extends StatefulWidget {
   final String? content;
   final String? hintText;
   final TextInputType? keyboardType;
-  
+
   @override
   _InputTextPageState createState() => _InputTextPageState();
 }
 
 class _InputTextPageState extends State<InputTextPage> {
-
   final TextEditingController _controller = TextEditingController();
   List<TextInputFormatter>? _inputFormatters;
   late int _maxLength;
@@ -37,13 +34,13 @@ class _InputTextPageState extends State<InputTextPage> {
     _maxLength = widget.keyboardType == TextInputType.phone ? 11 : 30;
     _inputFormatters = widget.keyboardType == TextInputType.phone ? [FilteringTextInputFormatter.allow(RegExp('[0-9]'))] : null;
   }
-  
+
   @override
   void dispose() {
     _controller.dispose();
     super.dispose();
   }
-  
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

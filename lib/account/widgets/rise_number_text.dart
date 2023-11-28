@@ -2,12 +2,7 @@ import 'package:flutter/material.dart';
 
 // 简易实现数字滚动效果
 class RiseNumberText extends StatefulWidget {
-
-  const RiseNumberText(this.number,{
-    super.key,
-    this.style,
-    this.duration = 1200
-  });
+  const RiseNumberText(this.number, {super.key, this.style, this.duration = 1200});
 
   final num number;
   final TextStyle? style;
@@ -18,11 +13,10 @@ class RiseNumberText extends StatefulWidget {
 }
 
 class _RiseNumberTextState extends State<RiseNumberText> with SingleTickerProviderStateMixin {
-
   late Animation<double> _animation;
   late AnimationController _controller;
   num _fromNumber = 0;
-  
+
   @override
   void initState() {
     super.initState();
@@ -48,7 +42,7 @@ class _RiseNumberTextState extends State<RiseNumberText> with SingleTickerProvid
     _controller.dispose();
     super.dispose();
   }
-  
+
   @override
   Widget build(BuildContext context) {
     return AnimatedBuilder(

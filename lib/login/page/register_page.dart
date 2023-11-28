@@ -11,7 +11,6 @@ import 'package:flutter_gen/gen_l10n/deer_localizations.dart';
 
 /// design/1注册登录/index.html#artboard11
 class RegisterPage extends StatefulWidget {
-
   const RegisterPage({super.key});
 
   @override
@@ -27,7 +26,7 @@ class _RegisterPageState extends State<RegisterPage> with ChangeNotifierMixin<Re
   final FocusNode _nodeText2 = FocusNode();
   final FocusNode _nodeText3 = FocusNode();
   bool _clickable = false;
-  
+
   @override
   Map<ChangeNotifier, List<VoidCallback>?>? changeNotifier() {
     final List<VoidCallback> callbacks = <VoidCallback>[_verify];
@@ -40,7 +39,7 @@ class _RegisterPageState extends State<RegisterPage> with ChangeNotifierMixin<Re
       _nodeText3: null,
     };
   }
-  
+
   void _verify() {
     final String name = _nameController.text;
     final String vCode = _vCodeController.text;
@@ -61,7 +60,7 @@ class _RegisterPageState extends State<RegisterPage> with ChangeNotifierMixin<Re
       });
     }
   }
-  
+
   void _register() {
     Toast.show('点击注册');
   }
@@ -69,15 +68,15 @@ class _RegisterPageState extends State<RegisterPage> with ChangeNotifierMixin<Re
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: MyAppBar(
-          title: DeerLocalizations.of(context)!.register,
-        ),
-        body: MyScrollView(
-          keyboardConfig: Utils.getKeyboardActionsConfig(context, <FocusNode>[_nodeText1, _nodeText2, _nodeText3]),
-          crossAxisAlignment: CrossAxisAlignment.center,
-          padding: const EdgeInsets.only(left: 16.0, right: 16.0, top: 20.0),
-          children: _buildBody(),
-        ),
+      appBar: MyAppBar(
+        title: DeerLocalizations.of(context)!.register,
+      ),
+      body: MyScrollView(
+        keyboardConfig: Utils.getKeyboardActionsConfig(context, <FocusNode>[_nodeText1, _nodeText2, _nodeText3]),
+        crossAxisAlignment: CrossAxisAlignment.center,
+        padding: const EdgeInsets.only(left: 16.0, right: 16.0, top: 20.0),
+        children: _buildBody(),
+      ),
     );
   }
 
@@ -105,6 +104,7 @@ class _RegisterPageState extends State<RegisterPage> with ChangeNotifierMixin<Re
         getVCode: () async {
           if (_nameController.text.length == 11) {
             Toast.show(DeerLocalizations.of(context)!.verificationButton);
+
             /// 一般可以在这里发送真正的请求，请求成功返回true
             return true;
           } else {

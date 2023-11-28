@@ -20,7 +20,6 @@ class RipplesAnimationPage extends StatefulWidget {
 }
 
 class _RipplesAnimationState extends State<RipplesAnimationPage> with TickerProviderStateMixin {
-
   late AnimationController _controller;
 
   @override
@@ -45,10 +44,7 @@ class _RipplesAnimationState extends State<RipplesAnimationPage> with TickerProv
         child: DecoratedBox(
           decoration: BoxDecoration(
             gradient: RadialGradient(
-              colors: <Color>[
-                widget.color,
-                Color.lerp(widget.color, Colors.black, .05)!
-              ],
+              colors: <Color>[widget.color, Color.lerp(widget.color, Colors.black, .05)!],
             ),
           ),
           child: ScaleTransition(
@@ -58,7 +54,11 @@ class _RipplesAnimationState extends State<RipplesAnimationPage> with TickerProv
                 curve: const PulsateCurve(),
               ),
             ),
-            child: const Icon(Icons.speaker_phone, size: 44, color: Colors.white,),
+            child: const Icon(
+              Icons.speaker_phone,
+              size: 44,
+              color: Colors.white,
+            ),
           ),
         ),
       ),
@@ -90,8 +90,8 @@ class _RipplesAnimationState extends State<RipplesAnimationPage> with TickerProv
 }
 
 class CirclePainter extends CustomPainter {
-
-  CirclePainter(this._animation, {
+  CirclePainter(
+    this._animation, {
     required this.color,
   }) : super(repaint: _animation);
 
@@ -121,6 +121,7 @@ class CirclePainter extends CustomPainter {
 
 class PulsateCurve extends Curve {
   const PulsateCurve();
+
   @override
   double transform(double t) {
     if (t == 0 || t == 1) {

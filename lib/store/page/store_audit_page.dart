@@ -16,10 +16,8 @@ import 'package:flutter_deer/widgets/text_field_item.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:keyboard_actions/keyboard_actions.dart';
 
-
 /// design/2店铺审核/index.html
 class StoreAuditPage extends StatefulWidget {
-
   const StoreAuditPage({super.key});
 
   @override
@@ -27,14 +25,12 @@ class StoreAuditPage extends StatefulWidget {
 }
 
 class _StoreAuditPageState extends State<StoreAuditPage> {
-
   final GlobalKey<SelectedImageState> _imageGlobalKey = GlobalKey<SelectedImageState>();
   final FocusNode _nodeText1 = FocusNode();
   final FocusNode _nodeText2 = FocusNode();
   final FocusNode _nodeText3 = FocusNode();
   final ImagePicker picker = ImagePicker();
   String _address = '陕西省 西安市 雁塔区 高新六路201号';
-
 
   KeyboardActionsConfig _buildConfig(BuildContext context) {
     return KeyboardActionsConfig(
@@ -89,6 +85,7 @@ class _StoreAuditPageState extends State<StoreAuditPage> {
         ),
         children: _buildBody(),
       ),
+
       /// 同时存在底部按钮与keyboardConfig配置时，为保证Android与iOS平台软键盘弹出高度正常，添加下面的代码。
       resizeToAvoidBottomInset: defaultTargetPlatform != TargetPlatform.iOS,
     );
@@ -115,45 +112,28 @@ class _StoreAuditPageState extends State<StoreAuditPage> {
         ),
       ),
       Gaps.vGap16,
-      TextFieldItem(
-        focusNode: _nodeText1,
-        title: '店铺名称',
-        hintText: '填写店铺名称'
-      ),
+      TextFieldItem(focusNode: _nodeText1, title: '店铺名称', hintText: '填写店铺名称'),
+      SelectedItem(title: '主营范围', content: _sortName, onTap: () => _showBottomSheet()),
       SelectedItem(
-        title: '主营范围',
-        content: _sortName,
-        onTap: () => _showBottomSheet()
-      ),
-      SelectedItem(
-        title: '店铺地址',
-        content: _address,
-        onTap: () {
-          NavigatorUtils.pushResult(context, ShopRouter.addressSelectPage, (result) {
-            setState(() {
-              final PoiSearch model = result as PoiSearch;
-              _address = '${model.provinceName.nullSafe} ${model.cityName.nullSafe} ${model.adName.nullSafe} ${model.title.nullSafe}';
+          title: '店铺地址',
+          content: _address,
+          onTap: () {
+            NavigatorUtils.pushResult(context, ShopRouter.addressSelectPage, (result) {
+              setState(() {
+                final PoiSearch model = result as PoiSearch;
+                _address =
+                    '${model.provinceName.nullSafe} ${model.cityName.nullSafe} ${model.adName.nullSafe} ${model.title.nullSafe}';
+              });
             });
-          });
-        }
-      ),
+          }),
       Gaps.vGap32,
       const Padding(
-        padding:EdgeInsets.only(left: 16.0),
+        padding: EdgeInsets.only(left: 16.0),
         child: Text('店主信息', style: TextStyles.textBold18),
       ),
       Gaps.vGap16,
-      TextFieldItem(
-        focusNode: _nodeText2,
-        title: '店主姓名',
-        hintText: '填写店主姓名'
-      ),
-      TextFieldItem(
-        focusNode: _nodeText3,
-        keyboardType: TextInputType.phone,
-        title: '联系电话',
-        hintText: '填写店主联系电话'
-      )
+      TextFieldItem(focusNode: _nodeText2, title: '店主姓名', hintText: '填写店主姓名'),
+      TextFieldItem(focusNode: _nodeText3, keyboardType: TextInputType.phone, title: '联系电话', hintText: '填写店主联系电话')
     ];
   }
 

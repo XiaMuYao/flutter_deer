@@ -1,4 +1,3 @@
-
 import 'dart:convert';
 
 import 'package:dio/dio.dart';
@@ -28,11 +27,9 @@ class AuthInterceptor extends Interceptor {
 }
 
 class TokenInterceptor extends QueuedInterceptor {
-
   Dio? _tokenDio;
 
   Future<String?> getToken() async {
-
     final Map<String, String> params = <String, String>{};
     params['refresh_token'] = SpUtil.getString(Constant.refreshToken).nullSafe;
     try {
@@ -42,7 +39,7 @@ class TokenInterceptor extends QueuedInterceptor {
       if (response.statusCode == ExceptionHandle.success) {
         return (json.decode(response.data.toString()) as Map<String, dynamic>)['access_token'] as String;
       }
-    } catch(e) {
+    } catch (e) {
       Log.e('刷新Token失败！');
     }
     return null;
@@ -69,8 +66,10 @@ class TokenInterceptor extends QueuedInterceptor {
 
         try {
           Log.e('----------- 重新请求接口 ------------');
+
           /// 避免重复执行拦截器，使用tokenDio
-          final Response<dynamic> response = await _tokenDio!.request<dynamic>(request.path,
+          final Response<dynamic> response = await _tokenDio!.request<dynamic>(
+            request.path,
             data: request.data,
             queryParameters: request.queryParameters,
             cancelToken: request.cancelToken,
@@ -87,11 +86,10 @@ class TokenInterceptor extends QueuedInterceptor {
   }
 }
 
-class LoggingInterceptor extends Interceptor{
-
+class LoggingInterceptor extends Interceptor {
   late DateTime _startTime;
   late DateTime _endTime;
-  
+
   @override
   void onRequest(RequestOptions options, RequestInterceptorHandler handler) {
     _startTime = DateTime.now();
@@ -107,7 +105,7 @@ class LoggingInterceptor extends Interceptor{
     Log.d('RequestData: ${options.data}');
     super.onRequest(options, handler);
   }
-  
+
   @override
   void onResponse(Response<dynamic> response, ResponseInterceptorHandler handler) {
     _endTime = DateTime.now();
@@ -122,7 +120,7 @@ class LoggingInterceptor extends Interceptor{
     Log.d('----------End: $duration 毫秒----------');
     super.onResponse(response, handler);
   }
-  
+
   @override
   void onError(DioException err, ErrorInterceptorHandler handler) {
     Log.d('----------Error-----------');
@@ -130,8 +128,7 @@ class LoggingInterceptor extends Interceptor{
   }
 }
 
-class AdapterInterceptor extends Interceptor{
-
+class AdapterInterceptor extends Interceptor {
   static const String _kMsg = 'msg';
   static const String _kSlash = "'";
   static const String _kMessage = 'message';
@@ -141,13 +138,13 @@ class AdapterInterceptor extends Interceptor{
 
   static const String _kFailureFormat = '{"code":%d,"message":"%s"}';
   static const String _kSuccessFormat = '{"code":0,"data":%s,"message":""}';
-  
+
   @override
   void onResponse(Response<dynamic> response, ResponseInterceptorHandler handler) {
     final Response<dynamic> r = adapterData(response);
     super.onResponse(r, handler);
   }
-  
+
   @override
   void onError(DioException err, ErrorInterceptorHandler handler) {
     if (err.response != null) {
@@ -159,6 +156,7 @@ class AdapterInterceptor extends Interceptor{
   Response<dynamic> adapterData(Response<dynamic> response) {
     String result;
     String content = response.data?.toString() ?? '';
+
     /// 成功时，直接格式化返回
     if (response.statusCode == ExceptionHandle.success || response.statusCode == ExceptionHandle.success_not_content) {
       if (content.isEmpty) {

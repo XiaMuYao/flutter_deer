@@ -15,22 +15,18 @@ class DateUtils {
   static final DateFormat _apiDayFormat2 = DateFormat('yy.MM.dd');
 
   static String formatMonth(DateTime d) => _monthFormat.format(d);
+
   static String formatDay(DateTime d) => _dayFormat.format(d);
+
   static String formatFirstDay(DateTime d) => _firstDayFormat.format(d);
+
   static String fullDayFormat(DateTime d) => _fullDayFormat.format(d);
+
   static String apiDayFormat(DateTime d) => _apiDayFormat.format(d);
+
   static String apiDayFormat2(DateTime d) => _apiDayFormat2.format(d);
 
-
-  static const List<String> weekdays = [
-    'Sun',
-    'Mon',
-    'Tue',
-    'Wed',
-    'Thu',
-    'Fri',
-    'Sat'
-  ];
+  static const List<String> weekdays = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 
   /// 周一开始
   static List<DateTime> daysInMonth(DateTime month) {
@@ -97,9 +93,7 @@ class DateUtils {
 
   /// The last day of a given month
   static DateTime lastDayOfMonth(DateTime month) {
-    final beginningNextMonth = (month.month < 12)
-        ? DateTime(month.year, month.month + 1)
-        : DateTime(month.year + 1);
+    final beginningNextMonth = (month.month < 12) ? DateTime(month.year, month.month + 1) : DateTime(month.year + 1);
     return beginningNextMonth.subtract(const Duration(days: 1));
   }
 

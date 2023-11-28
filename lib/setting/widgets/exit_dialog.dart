@@ -5,18 +5,15 @@ import 'package:flutter_deer/routers/fluro_navigator.dart';
 import 'package:flutter_deer/widgets/base_dialog.dart';
 
 class ExitDialog extends StatefulWidget {
-
   const ExitDialog({
     super.key,
   });
 
   @override
   _ExitDialog createState() => _ExitDialog();
-  
 }
 
 class _ExitDialog extends State<ExitDialog> {
-
   @override
   Widget build(BuildContext context) {
     return BaseDialog(

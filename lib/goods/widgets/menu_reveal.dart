@@ -2,15 +2,9 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 
-
 //https://github.com/alibaba/flutter-go/blob/master/lib/views/fourth_page/page_reveal.dart
 class MenuReveal extends StatelessWidget {
-
-  const MenuReveal({
-    super.key,
-    required this.revealPercent,
-    required this.child
-  });
+  const MenuReveal({super.key, required this.revealPercent, required this.child});
 
   final double revealPercent;
   final Widget child;
@@ -25,14 +19,12 @@ class MenuReveal extends StatelessWidget {
 }
 
 class CircleRevealClipper extends CustomClipper<Rect> {
-
   CircleRevealClipper(this.revealPercent);
 
   final double revealPercent;
 
   @override
   Rect getClip(Size size) {
-
     // 右上角的点击点为圆心
     final Offset epicenter = Offset(size.width - 25.0, 25.0);
 
@@ -49,5 +41,4 @@ class CircleRevealClipper extends CustomClipper<Rect> {
   bool shouldReclip(CustomClipper<Rect> oldClipper) {
     return true;
   }
-
 }

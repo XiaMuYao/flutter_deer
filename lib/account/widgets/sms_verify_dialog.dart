@@ -15,7 +15,6 @@ import 'package:flutter_deer/widgets/my_button.dart';
 /// design/6店铺-账户/index.html#artboard23
 /// 骚操作：借腹生子
 class SMSVerifyDialog extends StatefulWidget {
-
   const SMSVerifyDialog({super.key});
 
   @override
@@ -23,9 +22,9 @@ class SMSVerifyDialog extends StatefulWidget {
 }
 
 class _SMSVerifyDialogState extends State<SMSVerifyDialog> {
-
   /// 倒计时秒数
   final int _second = 60;
+
   /// 当前秒数
   late int _currentSecond;
   StreamSubscription<dynamic>? _subscription;
@@ -34,7 +33,7 @@ class _SMSVerifyDialogState extends State<SMSVerifyDialog> {
   final FocusNode _focusNode = FocusNode();
   final TextEditingController _controller = TextEditingController();
   final List<String> _codeList = ['', '', '', '', '', ''];
-  
+
   @override
   void initState() {
     super.initState();
@@ -49,7 +48,7 @@ class _SMSVerifyDialogState extends State<SMSVerifyDialog> {
 //      );
 //    });
   }
-  
+
   @override
   void dispose() {
     _subscription?.cancel();
@@ -57,11 +56,11 @@ class _SMSVerifyDialogState extends State<SMSVerifyDialog> {
     _controller.dispose();
     super.dispose();
   }
-  
+
   @override
   Widget build(BuildContext context) {
     final Color textColor = Theme.of(context).primaryColor;
-    
+
     final Widget child = Column(
       children: <Widget>[
         Stack(
@@ -85,7 +84,11 @@ class _SMSVerifyDialogState extends State<SMSVerifyDialog> {
                   onTap: () => NavigatorUtils.goBack(context),
                   child: const Padding(
                     padding: EdgeInsets.only(top: 16.0, right: 16.0),
-                    child: LoadAssetImage('goods/icon_dialog_close', width: 16.0, key: Key('dialog_close'),),
+                    child: LoadAssetImage(
+                      'goods/icon_dialog_close',
+                      width: 16.0,
+                      key: Key('dialog_close'),
+                    ),
                   ),
                 ),
               ),
@@ -104,8 +107,10 @@ class _SMSVerifyDialogState extends State<SMSVerifyDialog> {
                 controller: _controller,
                 focusNode: _focusNode,
                 keyboardType: TextInputType.number,
+
                 /// 指定键盘外观，仅iOS有效
                 keyboardAppearance: Brightness.dark,
+
                 /// 只能为数字、6位
                 inputFormatters: [FilteringTextInputFormatter.digitsOnly, LengthLimitingTextInputFormatter(6)],
                 // 隐藏光标与字体颜色，达到隐藏输入框的目的
@@ -115,7 +120,7 @@ class _SMSVerifyDialogState extends State<SMSVerifyDialog> {
                 backgroundCursorColor: Colors.transparent,
                 style: const TextStyle(color: Colors.transparent, fontSize: Dimens.font_sp18),
                 onChanged: (v) {
-                  for (var i = 0; i < _codeList.length; i ++) {
+                  for (var i = 0; i < _codeList.length; i++) {
                     if (i < v.length) {
                       _codeList[i] = v.substring(i, i + 1);
                     } else {
@@ -124,11 +129,12 @@ class _SMSVerifyDialogState extends State<SMSVerifyDialog> {
                   }
                   if (v.length == _codeList.length) {
                     Toast.show('验证码：${_controller.text}');
-                    for (var i = 0; i < _codeList.length; i ++) {
+                    for (var i = 0; i < _codeList.length; i++) {
                       _codeList[i] = '';
                     }
+
                     /// https://github.com/flutter/flutter/issues/47191
-                    /// https://github.com/flutter/flutter/pull/57264 
+                    /// https://github.com/flutter/flutter/pull/57264
                     /// 1.19.0已修复，小于此版本需添加addPostFrameCallback处理，否则会错误触发onChanged。
                     SchedulerBinding.instance.addPostFrameCallback((_) {
                       _controller.clear();
@@ -170,18 +176,20 @@ class _SMSVerifyDialogState extends State<SMSVerifyDialog> {
           disabledTextColor: Colours.text_gray,
           backgroundColor: Colors.transparent,
           disabledBackgroundColor: Colors.transparent,
-          onPressed: _clickable ? () {
-            setState(() {
-              _currentSecond = _second;
-              _clickable = false;
-            });
-            _subscription = Stream.periodic(const Duration(seconds: 1), (i) => i).take(_second).listen((i) {
-              setState(() {
-                _currentSecond = _second - i - 1;
-                _clickable = _currentSecond < 1;
-              });
-            });
-          }: null,
+          onPressed: _clickable
+              ? () {
+                  setState(() {
+                    _currentSecond = _second;
+                    _clickable = false;
+                  });
+                  _subscription = Stream.periodic(const Duration(seconds: 1), (i) => i).take(_second).listen((i) {
+                    setState(() {
+                      _currentSecond = _second - i - 1;
+                      _clickable = _currentSecond < 1;
+                    });
+                  });
+                }
+              : null,
         ),
       ],
     );
@@ -213,8 +221,9 @@ class _SMSVerifyDialogState extends State<SMSVerifyDialog> {
       );
     }
 
-    return Scaffold(//创建透明层
-      backgroundColor: Colors.transparent,//透明类型
+    return Scaffold(
+      //创建透明层
+      backgroundColor: Colors.transparent, //透明类型
       body: body,
     );
   }
@@ -228,7 +237,9 @@ class _SMSVerifyDialogState extends State<SMSVerifyDialog> {
           border: Border.all(width: 0.6, color: _codeList[p].isNotEmpty ? textColor : Colours.text_gray_c),
           borderRadius: BorderRadius.circular(4.0),
         ),
-        child: Text(_codeList[p], style: const TextStyle(fontSize: Dimens.font_sp18),)
-    );
+        child: Text(
+          _codeList[p],
+          style: const TextStyle(fontSize: Dimens.font_sp18),
+        ));
   }
 }

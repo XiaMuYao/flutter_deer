@@ -3,14 +3,8 @@ import 'package:flutter_deer/res/colors.dart';
 import 'package:flutter_deer/util/theme_utils.dart';
 
 class MyCard extends StatelessWidget {
+  const MyCard({super.key, required this.child, this.color, this.shadowColor});
 
-  const MyCard({
-    super.key,
-    required this.child,
-    this.color,
-    this.shadowColor
-  });
-  
   final Widget child;
   final Color? color;
   final Color? shadowColor;

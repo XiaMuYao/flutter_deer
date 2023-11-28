@@ -44,6 +44,7 @@ Future<void> main() async {
         /// 设置桌面端窗口大小
         await windowManager.setSize(const Size(400, 800));
         await windowManager.setMinimumSize(const Size(400, 800));
+
         /// 居中显示
         await windowManager.center();
         await windowManager.show();
@@ -120,11 +121,7 @@ class MyApp extends StatelessWidget {
       }
 
       quickActions.setShortcutItems(<ShortcutItem>[
-        const ShortcutItem(
-          type: 'demo',
-          localizedTitle: 'Demo',
-          icon: 'flutter_dash_black'
-        ),
+        const ShortcutItem(type: 'demo', localizedTitle: 'Demo', icon: 'flutter_dash_black'),
       ]);
     }
   }
@@ -145,12 +142,11 @@ class MyApp extends StatelessWidget {
 
     /// Toast 配置
     return OKToast(
-      backgroundColor: Colors.black54,
-      textPadding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 10.0),
-      radius: 20.0,
-      position: ToastPosition.bottom,
-      child: app
-    );
+        backgroundColor: Colors.black54,
+        textPadding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 10.0),
+        radius: 20.0,
+        position: ToastPosition.bottom,
+        child: app);
   }
 
   Widget _buildMaterialApp(ThemeProvider provider, LocaleProvider localeProvider) {

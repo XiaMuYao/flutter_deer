@@ -5,10 +5,8 @@ import 'package:flutter_deer/util/toast_utils.dart';
 import 'package:flutter_deer/widgets/base_dialog.dart';
 import 'package:flutter_deer/widgets/load_image.dart';
 
-
 /// design/7店铺-店铺配置/index.html#artboard10
 class PayTypeDialog extends StatefulWidget {
-
   const PayTypeDialog({
     super.key,
     this.value,
@@ -17,14 +15,12 @@ class PayTypeDialog extends StatefulWidget {
 
   final List<int>? value;
   final void Function(List<int>) onPressed;
-  
+
   @override
   _PayTypeDialog createState() => _PayTypeDialog();
-  
 }
 
 class _PayTypeDialog extends State<PayTypeDialog> {
-
   late List<int> _selectValue;
   final List<String> _list = <String>['线上支付', '对公转账', '货到付款'];
 
@@ -64,16 +60,15 @@ class _PayTypeDialog extends State<PayTypeDialog> {
       ),
     );
   }
-  
+
   @override
   Widget build(BuildContext context) {
     return BaseDialog(
       title: '支付方式(多选)',
       child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
-        mainAxisSize: MainAxisSize.min,
-        children: List.generate(_list.length, (i) => _buildItem(i))
-      ),
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          mainAxisSize: MainAxisSize.min,
+          children: List.generate(_list.length, (i) => _buildItem(i))),
       onPressed: () {
         NavigatorUtils.goBack(context);
         widget.onPressed(_selectValue);

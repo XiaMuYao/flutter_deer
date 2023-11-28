@@ -1,5 +1,4 @@
 class Book {
-
   Book(this.title, this.author);
 
   final String title;
@@ -14,7 +13,6 @@ class BooksListPath extends BookRoutePath {}
 class BooksSettingsPath extends BookRoutePath {}
 
 class BooksDetailsPath extends BookRoutePath {
-
   BooksDetailsPath(this.id);
 
   final int id;

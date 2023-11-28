@@ -1,11 +1,8 @@
-
 class FreightConfigModel {
+  FreightConfigModel(this.min, this.max, this.type, this.isAdd, this.price);
 
-  FreightConfigModel(this.min, this.max, this.type,
-      this.isAdd, this.price);
-
-  FreightConfigModel.fromJsonMap(Map<String, dynamic> map):
-        min = map['min'] as String,
+  FreightConfigModel.fromJsonMap(Map<String, dynamic> map)
+      : min = map['min'] as String,
         max = map['max'] as String,
         type = map['type'] as int,
         isAdd = map['isAdd'] as bool,
